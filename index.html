@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siempre Contigo</title>
+
+    <!-- Conexión con el archivo CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Siempre Contigo</h1>
+        <p id="mensaje">
+            Bienvenido a tu espacio de cuidado y asistencia.
+        </p>
+    </header>
+
+    <main>
+
+        <!-- Información principal -->
+        <section id="informacion">
+            <h2>Asistencia para el adulto mayor</h2>
+
+            <p>
+                Aquí puedes consultar tus medicamentos, citas y recordatorios.
+            </p>
+        </section>
+
+
+        <!-- Lista con mínimo tres elementos -->
+        <section>
+            <h2>Información de hoy</h2>
+
+            <ul id="listaInformacion">
+                <li>Medicamentos</li>
+                <li>Citas médicas</li>
+                <li>Recordatorios</li>
+            </ul>
+        </section>
+
+
+        <!-- Contenedor para agregar elementos dinámicamente -->
+        <section>
+            <h2>Recordatorios</h2>
+
+            <div id="contenedorDinamico">
+                <!-- Aquí JavaScript agregará nuevos elementos -->
+            </div>
+        </section>
+
+
+        <!-- Botones del taller -->
+        <section>
+            <h2>Funciones interactivas</h2>
+
+            <button id="btnTexto">Cambiar texto</button>
+
+            <button id="btnEstilo">Cambiar estilo</button>
+
+            <button id="btnAgregar">Agregar recordatorio</button>
+
+            <button id="btnEliminar">Eliminar último</button>
+
+            <button id="btnApi">Consultar medicamentos</button>
+        </section>
+
+
+        <!-- Información del objeto window -->
+        <section>
+            <h2>Información de la ventana</h2>
+
+            <p id="infoWindow">
+                Información de la ventana aparecerá aquí.
+            </p>
+        </section>
+
+
+        <!-- Resultado de la API -->
+        <section>
+            <h2>Resultado de la consulta</h2>
+
+            <div id="resultadoApi">
+                Aquí aparecerán los datos obtenidos de la API.
+            </div>
+        </section>
+
+
+        <!-- Emergencia -->
+        <section>
+            <button id="btnEmergencia">
+                🚨 EMERGENCIA - Solicitar ayuda
+            </button>
+        </section>
+
+    </main>
+
+
+    <!-- Conexión con JavaScript -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
