@@ -1,251 +1,154 @@
-/* =====================================================
-   SIEMPRE CONTIGO
-   JavaScript puro - Taller práctico
-   ===================================================== */
+document.addEventListener("DOMContentLoaded", () => {
 
+    // ==========================================
+    // 1. SELECCIÓN DE ELEMENTOS (getElementById, querySelector, querySelectorAll)
+    // ==========================================
 
-/* =====================================================
-   1. SELECCIÓN DE ELEMENTOS DEL DOM
-   ===================================================== */
+    // getElementById
+    const mainTitle = document.getElementById("main-title");
+    const welcomeMessage = document.getElementById("welcome-message");
+    const dynamicContainer = document.getElementById("dynamic-container");
+    const windowInfo = document.getElementById("window-info");
+    const apiResult = document.getElementById("api-result");
 
-// Selección utilizando getElementById()
-const mensaje = document.getElementById("mensaje");
+    // querySelector
+    const mainParagraph = document.querySelector("#main-paragraph");
+    const mainSidebar = document.querySelector("#main-sidebar");
+    const servicesList = document.querySelector("#services-list");
+    
+    // Botones
+    const btnChangeText = document.querySelector("#btn-change-text");
+    const btnToggleStyle = document.querySelector("#btn-toggle-style");
+    const btnDirectStyle = document.querySelector("#btn-direct-style");
+    const btnAdd = document.querySelector("#btn-add");
+    const btnRemove = document.querySelector("#btn-remove");
+    const btnFetchApi = document.querySelector("#btn-fetch-api");
 
-// Selección utilizando querySelector()
-const informacion = document.querySelector("#informacion");
+    // querySelectorAll
+    const navItems = document.querySelectorAll(".nav-item");
 
-// Selección utilizando querySelectorAll()
-const elementosLista = document.querySelectorAll("#listaInformacion li");
+    // Mapeo en consola exigido por la guía
+    console.log("--- Elementos seleccionados ---");
+    console.log("Título Lateral (getElementById):", mainTitle);
+    console.log("Párrafo Bienvenida (querySelector):", mainParagraph);
+    console.log("Opciones de menú (querySelectorAll):", navItems);
 
-// Guardamos el contenedor dinámico
-const contenedor = document.getElementById("contenedorDinamico");
+    // ==========================================
+    // 2. NAVEGACIÓN JERÁRQUICA EN EL DOM
+    // ==========================================
+    console.log("--- Navegación Jerárquica ---");
+    console.log("Nodo padre del menú:", servicesList.parentNode);
+    console.log("Hijos del menú:", servicesList.children);
+    console.log("Primer hijo de la lista:", servicesList.firstElementChild);
+    console.log("Último hijo de la lista:", servicesList.lastElementChild);
 
-// Guardamos los botones
-const btnTexto = document.getElementById("btnTexto");
-const btnEstilo = document.getElementById("btnEstilo");
-const btnAgregar = document.getElementById("btnAgregar");
-const btnEliminar = document.getElementById("btnEliminar");
-const btnApi = document.getElementById("btnApi");
+    // ==========================================
+    // 3. USO DEL OBJETO WINDOW (Petición explícita)
+    // ==========================================
+    console.log("URL Actual (location.href):", window.location.href);
+    console.log("Posición de scroll (scrollY):", window.scrollY);
 
-
-// Mostrar elementos seleccionados en la consola
-console.log("Elemento con getElementById:", mensaje);
-console.log("Elemento con querySelector:", informacion);
-console.log("Elementos con querySelectorAll:", elementosLista);
-
-
-/* =====================================================
-   2. NAVEGACIÓN JERÁRQUICA DEL DOM
-   ===================================================== */
-
-console.log("Nodo padre de la información:", informacion.parentElement);
-console.log("Hijos de la información:", informacion.children);
-console.log("Primer hijo:", informacion.firstElementChild);
-console.log("Último hijo:", informacion.lastElementChild);
-
-
-/* =====================================================
-   3. CAMBIAR TEXTO CON textContent
-   ===================================================== */
-
-btnTexto.addEventListener("click", function () {
-
-    mensaje.textContent =
-        "¡Hola! Recuerda tomar tus medicamentos y revisar tus citas.";
-
-    console.log("Se modificó el texto usando textContent.");
-});
-
-
-/* =====================================================
-   4. CAMBIAR TEXTO CON innerHTML
-   ===================================================== */
-
-informacion.addEventListener("click", function () {
-
-    informacion.innerHTML = `
-        <h2>¡Siempre Contigo!</h2>
-        <p>
-            Estamos aquí para ayudarte con tus medicamentos,
-            citas y recordatorios.
-        </p>
-    `;
-
-    console.log("Se modificó el contenido usando innerHTML.");
-});
-
-
-/* =====================================================
-   5. MODIFICACIÓN DE ESTILOS
-   ===================================================== */
-
-btnEstilo.addEventListener("click", function () {
-
-    // Modificación directa utilizando la propiedad style
-    informacion.style.backgroundColor = "#e8f8fa";
-    informacion.style.border = "3px solid #159caf";
-
-    // classList.toggle() agrega o quita la clase.
-    informacion.classList.toggle("estiloEspecial");
-
-    console.log("Se modificaron los estilos.");
-});
-
-
-/* =====================================================
-   6. classList.add() Y classList.remove()
-   ===================================================== */
-
-// Agregar una clase
-mensaje.classList.add("estiloEspecial");
-
-// Después podemos quitarla
-// mensaje.classList.remove("estiloEspecial");
-
-
-/*
-   MEJOR PRÁCTICA:
-
-   Considero que classList es mejor práctica para estilos
-   porque permite mantener el diseño en el archivo CSS
-   y evita colocar demasiados estilos directamente
-   desde JavaScript.
-*/
-
-
-/* =====================================================
-   7. CREAR ELEMENTOS DINÁMICAMENTE
-   ===================================================== */
-
-btnAgregar.addEventListener("click", function () {
-
-    const nuevoRecordatorio = document.createElement("div");
-
-    nuevoRecordatorio.classList.add("recordatorio");
-
-    nuevoRecordatorio.textContent =
-        "Nuevo recordatorio agregado correctamente.";
-
-    contenedor.appendChild(nuevoRecordatorio);
-
-    console.log("Se creó un nuevo elemento:", nuevoRecordatorio);
-});
-
-
-/* =====================================================
-   8. ELIMINAR EL ÚLTIMO ELEMENTO CREADO
-   ===================================================== */
-
-btnEliminar.addEventListener("click", function () {
-
-    const ultimoElemento = contenedor.lastElementChild;
-
-    if (ultimoElemento) {
-
-        ultimoElemento.remove();
-
-        console.log("Se eliminó el último elemento creado.");
-
-    } else {
-
-        console.log("No hay elementos para eliminar.");
+    function updateWindowSize() {
+        // Mostrar propiedad innerWidth dinámicamente en pantalla
+        windowInfo.textContent = `Ancho de ventana: ${window.innerWidth}px`;
     }
-});
+    updateWindowSize();
+    window.addEventListener("resize", updateWindowSize);
 
+    // ==========================================
+    // 4. CAMBIO DE TEXTO (textContent e innerHTML)
+    // ==========================================
+    let isChanged = false;
 
-/* =====================================================
-   9. OBJETO WINDOW
-   ===================================================== */
-
-// Obtener información de la ventana
-console.log("Ancho de la ventana:", window.innerWidth);
-console.log("Posición del scroll:", window.scrollY);
-console.log("URL actual:", window.location.href);
-
-
-// Mostrar información de window dentro de la página
-const infoWindow = document.getElementById("infoWindow");
-
-function actualizarWindow() {
-
-    infoWindow.textContent =
-        "Ancho de la ventana: " + window.innerWidth +
-        " px | Scroll: " + window.scrollY + " px";
-}
-
-actualizarWindow();
-
-
-// Actualizar cuando cambie el tamaño de la ventana
-window.addEventListener("resize", actualizarWindow);
-
-// Actualizar cuando se haga scroll
-window.addEventListener("scroll", actualizarWindow);
-
-
-/* =====================================================
-   10. CONSUMO DE UNA API PÚBLICA
-   ===================================================== */
-
-// API pública de medicamentos de OpenFDA
-const urlApi =
-    "https://api.fda.gov/drug/drugsfda.json?limit=3";
-
-
-btnApi.addEventListener("click", async function () {
-
-    const resultado = document.getElementById("resultadoApi");
-
-    resultado.innerHTML = "Consultando información...";
-
-    try {
-
-        // Realizamos la petición a la API
-        const respuesta = await fetch(urlApi);
-
-        // Comprobamos si hubo un error
-        if (!respuesta.ok) {
-            throw new Error("No se pudo consultar la API.");
+    btnChangeText.addEventListener("click", () => {
+        if (!isChanged) {
+            welcomeMessage.textContent = "¡Cita Confirmada con el Dr. Pérez!";
+            mainParagraph.innerHTML = "Tu cita está agendada para la dirección: <strong>Consultorio 302</strong>.";
+            isChanged = true;
+        } else {
+            welcomeMessage.textContent = "¡Buenos días, Cruz Elena!";
+            mainParagraph.textContent = "¿Cómo te sientes hoy?";
+            isChanged = false;
         }
+    });
 
-        // Convertimos la respuesta a formato JSON
-        const datos = await respuesta.json();
+    // ==========================================
+    // 5. ESTILOS: classList vs style (Con Explicación)
+    // ==========================================
 
-        console.log("Datos recibidos de la API:", datos);
+    /* 
+      EXPLICACIÓN - MEJORES PRÁCTICAS:
+      Es preferible usar classList.add/remove/toggle sobre style directos porque:
+      1. Mantiene separados la estructura (HTML/JS) de la presentación (CSS).
+      2. Permite reutilizar reglas completas y facilita el mantenimiento futuro del código.
+    */
 
-        // Limpiamos el contenedor
-        resultado.innerHTML = "";
+    // Modificación mediante classList.toggle
+    btnToggleStyle.addEventListener("click", () => {
+        mainSidebar.classList.toggle("dark-mode-sidebar");
+    });
 
-        // Mostramos los datos obtenidos en el DOM
-        datos.results.forEach(function (medicamento) {
+    // Modificación directa mediante style (Botón SOS)
+    btnDirectStyle.addEventListener("click", () => {
+        if (btnDirectStyle.style.backgroundColor === "orange") {
+            btnDirectStyle.style.backgroundColor = "";
+        } else {
+            btnDirectStyle.style.backgroundColor = "orange";
+        }
+    });
 
-            const elemento = document.createElement("div");
+    // ==========================================
+    // 6. AGREGAR Y ELIMINAR ELEMENTOS DINÁMICOS (remove / removeChild)
+    // ==========================================
+    let reminderCount = 2;
 
-            elemento.classList.add("recordatorio");
+    btnAdd.addEventListener("click", () => {
+        reminderCount++;
+        const newReminder = document.createElement("div");
+        newReminder.classList.add("reminder-item");
+        
+        newReminder.innerHTML = `
+            <span>💊 Tomar Agua #${reminderCount}</span>
+            <span class="time">5:00 p.m.</span>
+        `;
+        
+        dynamicContainer.appendChild(newReminder);
+    });
 
-            elemento.innerHTML = `
-                <strong>Medicamento:</strong>
-                ${medicamento.products?.[0]?.brand_name || "Sin nombre"}
-                <br>
-                <strong>Fabricante:</strong>
-                ${medicamento.sponsor_name || "No disponible"}
-            `;
+    btnRemove.addEventListener("click", () => {
+        const lastReminder = dynamicContainer.lastElementChild;
+        if (lastReminder) {
+            // Uso de remove() para eliminar el último elemento dinámico
+            lastReminder.remove();
+        } else {
+            alert("No hay más recordatorios para eliminar.");
+        }
+    });
 
-            resultado.appendChild(elemento);
-        });
+    // ==========================================
+    // 7. CONSUMO DE API MEDIANTE FETCH
+    // ==========================================
+    btnFetchApi.addEventListener("click", () => {
+        apiResult.innerHTML = "<p>Cargando datos desde la API...</p>";
 
-    } catch (error) {
+        fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error en la petición API");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Mostrar datos consumidos en la tarjeta
+                apiResult.innerHTML = `
+                    <p>💊 <strong>${data.title}</strong></p>
+                    <p>⏰ Estado: ${data.completed ? 'Tomado' : 'Pendiente 10:00 a.m.'}</p>
+                `;
+            })
+            .catch(error => {
+                console.error("Error API:", error);
+                apiResult.innerHTML = `<p style="color:red;">Error al cargar datos de la API.</p>`;
+            });
+    });
 
-        console.error("Error al consumir la API:", error);
-
-        resultado.innerHTML =
-            "⚠️ No fue posible obtener los datos de la API.";
-    }
 });
-
-
-/* =====================================================
-   FIN DEL SCRIPT
-   ===================================================== */
-
-console.log("JavaScript cargado correctamente.");
