@@ -1,40 +1,233 @@
-/* =========================================
-   ESTILOS GENERALES
-   ========================================= */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f3f5f8;
-    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #333;
+}
+
+.app {
+    display: flex;
     min-height: 100vh;
 }
 
 
 /* =========================================
-   ENCABEZADO
+   BARRA LATERAL
    ========================================= */
 
-header {
-    background: linear-gradient(135deg, #16b5c5, #6c3ee8);
-    color: white;
-    padding: 35px 20px;
+.sidebar {
+    width: 247px;
+    min-height: 100vh;
+
+    background: #08798a;
+
+    padding: 15px 13px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 0 0 9px 9px;
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
     text-align: center;
 }
 
-header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+.logo h1 {
+    color: white;
+
+    font-family: "Trebuchet MS", Arial, sans-serif;
+
+    font-size: 25px;
+
+    margin-bottom: 17px;
 }
 
-header p {
+.logo-circulo {
+    width: 100px;
+    height: 100px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 4px solid #9ce5eb;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.logo-circulo img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   MENÚ
+   ========================================= */
+
+.menu {
+    margin-top: 14px;
+
+    background: #008da2;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+}
+
+.menu-item {
+    height: 57px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 0 18px;
+
+    color: white;
+
+    text-decoration: none;
+
     font-size: 18px;
+
+    transition: background 0.2s;
+}
+
+.menu-item img {
+    width: 32px;
+    height: 32px;
+
+    object-fit: contain;
+}
+
+.menu-item:hover {
+    background: #45a9b9;
+}
+
+.menu-item.activo {
+    background: #4aaabb;
+}
+
+
+/* =========================================
+   CERRAR SESIÓN
+   ========================================= */
+
+.cerrar-sesion {
+    margin-top: auto;
+
+    height: 63px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #0793a8;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding-left: 20px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.cerrar-sesion img {
+    width: 35px;
+    height: 35px;
+
+    object-fit: contain;
+}
+
+.cerrar-sesion:hover {
+    background: #068397;
+}
+
+
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.contenido {
+    flex: 1;
+
+    min-width: 0;
+
+    background: white;
+}
+
+
+/* =========================================
+   BARRA SUPERIOR
+   ========================================= */
+
+.topbar {
+    height: 76px;
+
+    border-bottom: 2px solid #b9e9ef;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    padding: 0 20px;
+}
+
+.usuario {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #777;
+
+    font-size: 20px;
+}
+
+.usuario img {
+    width: 35px;
+    height: 35px;
+
+    object-fit: contain;
+}
+
+.flecha {
+    font-size: 30px;
+
+    color: #777;
+
+    margin-left: 5px;
 }
 
 
@@ -42,68 +235,415 @@ header p {
    CONTENIDO PRINCIPAL
    ========================================= */
 
-main {
-    width: 90%;
-    max-width: 1100px;
-    margin: 30px auto;
+.main-content {
+    padding: 20px 38px 35px;
 }
 
 
 /* =========================================
-   SECCIONES / TARJETAS
+   SALUDO
    ========================================= */
 
-section {
+.saludo {
+    margin-bottom: 20px;
+}
+
+.saludo h2 {
+    color: #006f83;
+
+    font-size: 24px;
+
+    margin-bottom: 4px;
+}
+
+.saludo p {
+    font-size: 18px;
+
+    color: #333;
+}
+
+
+/* =========================================
+   TARJETAS
+   ========================================= */
+
+.tarjetas {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 13px;
+
+    max-width: 100%;
+}
+
+
+/* =========================================
+   TARJETA GENERAL
+   ========================================= */
+
+.tarjeta {
+    min-height: 187px;
+
     background: white;
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    border-radius: 6px;
+
+    padding: 13px 15px;
+
+    position: relative;
+
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
 }
 
-section h2 {
-    color: #167b8b;
-    margin-bottom: 15px;
-}
+.tarjeta h3 {
+    font-size: 16px;
 
-
-/* =========================================
-   LISTA
-   ========================================= */
-
-#listaInformacion {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-#listaInformacion li {
-    background: #e8f8fa;
-    border-left: 5px solid #18aebe;
-    padding: 18px;
-    border-radius: 10px;
-    flex: 1;
-    min-width: 180px;
-    font-weight: bold;
+    margin-bottom: 7px;
 }
 
 
 /* =========================================
-   CONTENEDOR DINÁMICO
+   COLORES DE LAS TARJETAS
    ========================================= */
 
-#contenedorDinamico {
+.tarjeta-cita {
+    border: 2px solid #9c48d2;
+}
+
+.tarjeta-cita h3 {
+    color: #9140c6;
+}
+
+.tarjeta-medicamentos {
+    border: 2px solid #55b8ef;
+}
+
+.tarjeta-medicamentos h3 {
+    color: #55aee6;
+}
+
+.tarjeta-recordatorios {
+    border: 2px solid #d5bd00;
+}
+
+.tarjeta-recordatorios h3 {
+    color: #c2aa00;
+}
+
+
+/* =========================================
+   LÍNEA
+   ========================================= */
+
+.linea {
+    width: 100%;
+
+    height: 1px;
+
+    margin-bottom: 9px;
+}
+
+.tarjeta-cita .linea {
+    background: #b85ae7;
+}
+
+.tarjeta-medicamentos .linea {
+    background: #69bdf0;
+}
+
+.tarjeta-recordatorios .linea {
+    background: #d8c52b;
+}
+
+
+/* =========================================
+   CITA
+   ========================================= */
+
+.contenido-cita {
     display: flex;
-    flex-direction: column;
+
+    align-items: center;
+
     gap: 10px;
 }
 
+.icono-cita {
+    width: 50px;
+    height: 60px;
+
+    object-fit: contain;
+}
+
+.contenido-cita strong {
+    font-size: 14px;
+
+    color: #555;
+}
+
+.contenido-cita p {
+    font-size: 12px;
+
+    margin: 4px 0 6px;
+
+    color: #777;
+}
+
+.dato {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
+
+    color: #555;
+}
+
+.dato img {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================
+   BOTÓN VER DETALLES
+   ========================================= */
+
+.btn-detalles {
+    position: absolute;
+
+    bottom: 8px;
+
+    right: 13px;
+
+    width: 125px;
+
+    height: 29px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.tarjeta-cita .btn-detalles {
+    background: #923dca;
+}
+
+.tarjeta-medicamentos .btn-detalles {
+    background: #55b7ed;
+}
+
+.tarjeta-cita .btn-detalles:hover {
+    background: #7e2db4;
+}
+
+.tarjeta-medicamentos .btn-detalles:hover {
+    background: #3da5df;
+}
+
+
+/* =========================================
+   MEDICAMENTO
+   ========================================= */
+
+.medicamento {
+    height: 65px;
+
+    border: 1px solid #55b8ef;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 7px 12px;
+}
+
+.medicamento > img {
+    width: 38px;
+    height: 38px;
+
+    object-fit: contain;
+}
+
+.medicamento p {
+    font-size: 13px;
+
+    color: #666;
+
+    margin-bottom: 8px;
+}
+
+.hora {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 11px;
+
+    color: #555;
+}
+
+.hora img {
+    width: 21px;
+    height: 21px;
+}
+
+
+/* =========================================
+   RECORDATORIOS
+   ========================================= */
+
 .recordatorio {
-    background: #fffbea;
-    border-left: 5px solid #e4c928;
-    padding: 15px;
+    height: 40px;
+
+    border: 1px solid #d3bf1b;
+
     border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 4px 8px;
+
+    margin-bottom: 9px;
+
+    gap: 7px;
+}
+
+.recordatorio img {
+    width: 27px;
+    height: 27px;
+
+    object-fit: contain;
+}
+
+.recordatorio span {
+    flex: 1;
+
+    font-size: 12px;
+
+    color: #555;
+}
+
+.recordatorio strong {
+    font-size: 11px;
+
+    color: #666;
+
+    font-weight: normal;
+}
+
+
+/* =========================================
+   EMERGENCIA
+   ========================================= */
+
+.emergencia-panel {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 58px;
+}
+
+#btnEmergencia {
+    width: 250px;
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #b5200d;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.25);
+
+    cursor: pointer;
+}
+
+#btnEmergencia img {
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+}
+
+#btnEmergencia div {
+    text-align: left;
+}
+
+#btnEmergencia strong {
+    display: block;
+
+    font-size: 19px;
+}
+
+#btnEmergencia span {
+    display: block;
+
+    font-size: 14px;
+
+    margin-top: 3px;
+}
+
+#btnEmergencia:hover {
+    background: #981b0b;
+}
+
+
+/* =========================================
+   ELEMENTOS DEL TALLER
+   ========================================= */
+
+.panel-taller {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.panel-taller h3 {
+    color: #087b8c;
+
+    margin-bottom: 15px;
 }
 
 
@@ -111,75 +651,98 @@ section h2 {
    BOTONES
    ========================================= */
 
-button {
+.botones {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.botones button,
+#btnAgregar {
     border: none;
-    border-radius: 10px;
-    padding: 13px 18px;
-    margin: 6px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    background: #159caf;
+
+    background: #087b8c;
+
     color: white;
-    transition: 0.3s;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-
-/* =========================================
-   BOTÓN DE EMERGENCIA
-   ========================================= */
-
-#btnEmergencia {
-    display: block;
-    margin: 10px auto;
-    background: #c92525;
-    font-size: 18px;
-    padding: 16px 30px;
-}
-
-#btnEmergencia:hover {
-    background: #a81919;
+.botones button:hover,
+#btnAgregar:hover {
+    background: #066c7b;
 }
 
 
 /* =========================================
-   INFORMACIÓN DE WINDOW
+   TABLA
    ========================================= */
 
-#infoWindow {
-    background: #eef0ff;
-    border-left: 5px solid #6c3ee8;
-    padding: 15px;
-    border-radius: 10px;
+.titulo-tabla {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+.titulo-tabla h3 {
+    margin: 0;
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 11px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    color: #087b8c;
+
+    background: #edfafa;
+
+    font-size: 13px;
+}
+
+td {
+    font-size: 13px;
 }
 
 
 /* =========================================
-   RESULTADO DE LA API
+   API / WINDOW
    ========================================= */
 
+#infoWindow,
 #resultadoApi {
-    background: #eaf8ff;
-    border-left: 5px solid #45b8e8;
-    padding: 20px;
-    border-radius: 10px;
-    min-height: 60px;
-}
+    padding: 15px;
 
+    background: #f5fafa;
 
-/* =========================================
-   ESTILO PARA CUANDO USEMOS classList
-   ========================================= */
+    border-radius: 8px;
 
-.estiloEspecial {
-    background: #dff7f4;
-    border: 3px solid #159caf;
-    transform: scale(1.02);
+    color: #666;
 }
 
 
@@ -187,22 +750,46 @@ button:hover {
    RESPONSIVE
    ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
 
-    header h1 {
-        font-size: 28px;
+    .sidebar {
+        width: 210px;
     }
 
-    main {
-        width: 95%;
+    .tarjetas {
+        grid-template-columns: 1fr;
     }
 
-    #listaInformacion {
+}
+
+@media (max-width: 650px) {
+
+    .app {
         flex-direction: column;
     }
 
-    button {
+    .sidebar {
         width: 100%;
-        margin: 5px 0;
+
+        min-height: auto;
     }
+
+    .menu {
+        display: flex;
+
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        white-space: nowrap;
+    }
+
+    .cerrar-sesion {
+        margin-top: 15px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
 }

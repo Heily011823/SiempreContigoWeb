@@ -1,105 +1,662 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Siempre Contigo</title>
 
-    <!-- Conexión con el archivo CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Siempre Contigo</h1>
-        <p id="mensaje">
-            Bienvenido a tu espacio de cuidado y asistencia.
-        </p>
-    </header>
+    <div class="app">
 
-    <main>
+        <!-- =========================================
+             BARRA LATERAL
+             ========================================= -->
 
-        <!-- Información principal -->
-        <section id="informacion">
-            <h2>Asistencia para el adulto mayor</h2>
+        <aside class="sidebar">
 
-            <p>
-                Aquí puedes consultar tus medicamentos, citas y recordatorios.
-            </p>
-        </section>
+            <!-- LOGO -->
 
+            <div class="logo">
 
-        <!-- Lista con mínimo tres elementos -->
-        <section>
-            <h2>Información de hoy</h2>
+                <h1>Siempre Contigo</h1>
 
-            <ul id="listaInformacion">
-                <li>Medicamentos</li>
-                <li>Citas médicas</li>
-                <li>Recordatorios</li>
-            </ul>
-        </section>
+                <div class="logo-circulo">
 
+                    <img src="images/Logo2.png"
+                         alt="Siempre Contigo">
 
-        <!-- Contenedor para agregar elementos dinámicamente -->
-        <section>
-            <h2>Recordatorios</h2>
+                </div>
 
-            <div id="contenedorDinamico">
-                <!-- Aquí JavaScript agregará nuevos elementos -->
             </div>
-        </section>
 
 
-        <!-- Botones del taller -->
-        <section>
-            <h2>Funciones interactivas</h2>
+            <!-- MENÚ -->
 
-            <button id="btnTexto">Cambiar texto</button>
+            <nav class="menu">
 
-            <button id="btnEstilo">Cambiar estilo</button>
+                <a href="#inicio" class="menu-item activo">
 
-            <button id="btnAgregar">Agregar recordatorio</button>
+                    <img src="images/Inicio.png"
+                         alt="Inicio">
 
-            <button id="btnEliminar">Eliminar último</button>
+                    <span>Inicio</span>
 
-            <button id="btnApi">Consultar medicamentos</button>
-        </section>
+                </a>
 
 
-        <!-- Información del objeto window -->
-        <section>
-            <h2>Información de la ventana</h2>
+                <a href="#medicamentos" class="menu-item">
 
-            <p id="infoWindow">
-                Información de la ventana aparecerá aquí.
-            </p>
-        </section>
+                    <img src="images/Medicamentos.png"
+                         alt="Medicamentos">
 
+                    <span>Medicamentos</span>
 
-        <!-- Resultado de la API -->
-        <section>
-            <h2>Resultado de la consulta</h2>
-
-            <div id="resultadoApi">
-                Aquí aparecerán los datos obtenidos de la API.
-            </div>
-        </section>
+                </a>
 
 
-        <!-- Emergencia -->
-        <section>
-            <button id="btnEmergencia">
-                🚨 EMERGENCIA - Solicitar ayuda
+                <a href="#recordatorios" class="menu-item">
+
+                    <img src="images/Recordatorios.png"
+                         alt="Recordatorios">
+
+                    <span>Recordatorios</span>
+
+                </a>
+
+
+                <a href="#voz" class="menu-item">
+
+                    <img src="images/Lecturadevoz.png"
+                         alt="Lectura de voz">
+
+                    <span>Lectura de voz</span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- CERRAR SESIÓN -->
+
+            <button class="cerrar-sesion">
+
+                <img src="images/cerrar-sesion.png"
+                     alt="Cerrar sesión">
+
+                <span>Cerrar Sesión</span>
+
             </button>
-        </section>
 
-    </main>
+        </aside>
 
 
-    <!-- Conexión con JavaScript -->
+        <!-- =========================================
+             CONTENIDO
+             ========================================= -->
+
+        <div class="contenido">
+
+
+            <!-- BARRA SUPERIOR -->
+
+            <header class="topbar">
+
+                <div class="usuario">
+
+                    <img src="images/usuario.png"
+                         alt="Usuario">
+
+                    <span>Cruz Elena</span>
+
+                    <span class="flecha">⌄</span>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================================
+                 CONTENIDO PRINCIPAL
+                 ========================================= -->
+
+            <main class="main-content">
+
+
+                <!-- =====================================
+                     INICIO
+                     ===================================== -->
+
+                <section id="inicio" class="vista">
+
+
+                    <!-- SALUDO -->
+
+                    <section class="saludo">
+
+                        <h2>
+                            ¡Buenos días, Cruz Elena!
+                        </h2>
+
+                        <p>
+                            ¿Cómo te sientes hoy?
+                        </p>
+
+                    </section>
+
+
+                    <!-- =================================
+                         TARJETAS
+                         ================================= -->
+
+                    <section class="tarjetas">
+
+
+                        <!-- PRÓXIMA CITA -->
+
+                        <div class="tarjeta tarjeta-cita">
+
+                            <h3>
+                                Próxima cita
+                            </h3>
+
+                            <div class="linea"></div>
+
+
+                            <div class="contenido-cita">
+
+                                <img src="images/estetoscopio.png"
+                                     alt="Estetoscopio"
+                                     class="icono-cita">
+
+
+                                <div>
+
+                                    <strong>
+                                        Dr. Juan Pérez
+                                    </strong>
+
+                                    <p>
+                                        Medicina general
+                                    </p>
+
+
+                                    <div class="dato">
+
+                                        <img src="images/calendario.png"
+                                             alt="Calendario">
+
+                                        <span>
+                                            Viernes, 24 de Mayo
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="dato">
+
+                                        <img src="images/reloj.png"
+                                             alt="Hora">
+
+                                        <span>
+                                            10:00 a.m.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <button class="btn-detalles">
+                                Ver detalles
+                            </button>
+
+                        </div>
+
+
+                        <!-- MEDICAMENTOS DE HOY -->
+
+                        <div class="tarjeta tarjeta-medicamentos">
+
+                            <h3>
+                                Medicamentos de hoy
+                            </h3>
+
+                            <div class="linea"></div>
+
+
+                            <div class="medicamento">
+
+                                <img src="images/medicamento.png"
+                                     alt="Medicamento">
+
+
+                                <div>
+
+                                    <p>
+                                        Acetaminofén
+                                    </p>
+
+
+                                    <div class="hora">
+
+                                        <img src="images/reloj.png"
+                                             alt="Hora">
+
+                                        <span>
+                                            10:00 a.m.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <button class="btn-detalles">
+                                Ver detalles
+                            </button>
+
+                        </div>
+
+
+                        <!-- RECORDATORIOS DE HOY -->
+
+                        <div class="tarjeta tarjeta-recordatorios">
+
+                            <h3>
+                                Recordatorios de hoy
+                            </h3>
+
+                            <div class="linea"></div>
+
+
+                            <div class="recordatorio">
+
+                                <img src="images/agua.png"
+                                     alt="Beber agua">
+
+                                <span>
+                                    Beber agua
+                                </span>
+
+                                <strong>
+                                    11:00 a.m.
+                                </strong>
+
+                            </div>
+
+
+                            <div class="recordatorio">
+
+                                <img src="images/caminar.png"
+                                     alt="Caminar">
+
+                                <span>
+                                    Caminar
+                                </span>
+
+                                <strong>
+                                    4:00 p.m.
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================
+                         EMERGENCIA
+                         ================================= -->
+
+                    <section class="emergencia-panel">
+
+                        <button id="btnEmergencia">
+
+                            <img src="images/Emergencia.png"
+                                 alt="Emergencia">
+
+                            <div>
+
+                                <strong>
+                                    EMERGENCIA
+                                </strong>
+
+                                <span>
+                                    Solicitar ayuda
+                                </span>
+
+                            </div>
+
+                        </button>
+
+                    </section>
+
+                </section>
+
+
+                <!-- =====================================
+                     MEDICAMENTOS
+                     ===================================== -->
+
+                <section id="medicamentos"
+                         class="vista oculto">
+
+
+                    <h2 class="titulo-seccion">
+                        Mis medicamentos
+                    </h2>
+
+
+                    <p class="descripcion-seccion">
+                        Aquí puedes consultar los medicamentos
+                        que tienes programados.
+                    </p>
+
+
+                    <!-- TABLA -->
+
+                    <section class="panel-taller">
+
+                        <h3>
+                            Medicamentos registrados
+                        </h3>
+
+
+                        <div class="tabla-contenedor">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Nombre
+                                        </th>
+
+                                        <th>
+                                            ¿Cada cuánto?
+                                        </th>
+
+                                        <th>
+                                            Fecha inicio
+                                        </th>
+
+                                        <th>
+                                            Fecha fin
+                                        </th>
+
+                                        <th>
+                                            Dosis
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="contenedorDinamico">
+
+
+                                    <tr>
+
+                                        <td>
+                                            Acetaminofén
+                                        </td>
+
+                                        <td>
+                                            Cada 8 horas
+                                        </td>
+
+                                        <td>
+                                            05/09/2026
+                                        </td>
+
+                                        <td>
+                                            10/09/2026
+                                        </td>
+
+                                        <td>
+                                            1 tableta
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>
+                                            Losartán
+                                        </td>
+
+                                        <td>
+                                            Cada 12 horas
+                                        </td>
+
+                                        <td>
+                                            05/09/2026
+                                        </td>
+
+                                        <td>
+                                            20/09/2026
+                                        </td>
+
+                                        <td>
+                                            1 tableta
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+
+                                        <td>
+                                            Omeprazol
+                                        </td>
+
+                                        <td>
+                                            Cada 24 horas
+                                        </td>
+
+                                        <td>
+                                            05/09/2026
+                                        </td>
+
+                                        <td>
+                                            30/09/2026
+                                        </td>
+
+                                        <td>
+                                            1 cápsula
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CONSULTA API -->
+
+                    <section class="panel-taller">
+
+                        <h3>
+                            Consulta de medicamentos
+                        </h3>
+
+
+                        <div id="resultadoApi">
+
+                            Los datos obtenidos de la API
+                            aparecerán aquí.
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+
+                <!-- =====================================
+                     RECORDATORIOS
+                     ===================================== -->
+
+                <section id="recordatorios"
+                         class="vista oculto">
+
+
+                    <h2 class="titulo-seccion">
+                        Mis recordatorios
+                    </h2>
+
+
+                    <p class="descripcion-seccion">
+                        Aquí puedes consultar tus recordatorios
+                        del día.
+                    </p>
+
+
+                    <section class="panel-taller">
+
+
+                        <div class="recordatorio">
+
+                            <img src="images/agua.png"
+                                 alt="Beber agua">
+
+                            <span>
+                                Beber agua
+                            </span>
+
+                            <strong>
+                                11:00 a.m.
+                            </strong>
+
+                        </div>
+
+
+                        <div class="recordatorio">
+
+                            <img src="images/caminar.png"
+                                 alt="Caminar">
+
+                            <span>
+                                Caminar
+                            </span>
+
+                            <strong>
+                                4:00 p.m.
+                            </strong>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+
+                <!-- =====================================
+                     LECTURA DE VOZ
+                     ===================================== -->
+
+                <section id="voz"
+                         class="vista oculto">
+
+
+                    <h2 class="titulo-seccion">
+                        Lectura de voz
+                    </h2>
+
+
+                    <p class="descripcion-seccion">
+                        Escucha la información de tus medicamentos
+                        y recordatorios.
+                    </p>
+
+
+                    <section class="panel-taller">
+
+                        <button id="btnTexto">
+                            Escuchar información
+                        </button>
+
+                    </section>
+
+                </section>
+
+
+                <!-- =====================================
+                     INFORMACIÓN DE LA VENTANA
+                     ===================================== -->
+
+                <section class="panel-taller">
+
+                    <h3>
+                        Información de la ventana
+                    </h3>
+
+                    <p id="infoWindow">
+                        Información de la ventana
+                        aparecerá aquí.
+                    </p>
+
+                </section>
+
+
+                <!-- =====================================
+                     FUNCIONES DEL TALLER
+                     ===================================== -->
+
+                <section class="panel-taller">
+
+                    <h3>
+                        Funciones interactivas
+                    </h3>
+
+
+                    <div class="botones">
+
+                        <button id="btnEstilo">
+                            Cambiar estilo
+                        </button>
+
+                        <button id="btnEliminar">
+                            Eliminar último
+                        </button>
+
+                        <button id="btnApi">
+                            Consultar API
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
     <script src="js/script.js"></script>
 
 </body>
+
 </html>
