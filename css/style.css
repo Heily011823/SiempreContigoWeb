@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +13,15 @@ body {
 .app {
     display: flex;
     min-height: 100vh;
+}
+
+
+/* =========================================
+   CLASE PARA OCULTAR ELEMENTOS (faltaba)
+   ========================================= */
+
+.oculto {
+    display: none !important;
 }
 
 
@@ -323,11 +331,11 @@ body {
     color: #55aee6;
 }
 
-.tarjeta-recordatorios {
+.tarjeta-recomendaciones {
     border: 2px solid #d5bd00;
 }
 
-.tarjeta-recordatorios h3 {
+.tarjeta-recomendaciones h3 {
     color: #c2aa00;
 }
 
@@ -352,7 +360,7 @@ body {
     background: #69bdf0;
 }
 
-.tarjeta-recordatorios .linea {
+.tarjeta-recomendaciones .linea {
     background: #d8c52b;
 }
 
@@ -413,6 +421,30 @@ body {
 
 
 /* =========================================
+   DETALLE DE LA CITA (cargado con fetch)
+   ========================================= */
+
+.detalle-cita {
+    margin-top: 10px;
+    margin-bottom: 40px;
+
+    padding: 10px;
+
+    background: #f7edfc;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    color: #555;
+}
+
+.detalle-cita p {
+    margin-bottom: 4px;
+}
+
+
+/* =========================================
    BOTÓN VER DETALLES
    ========================================= */
 
@@ -458,7 +490,7 @@ body {
 
 
 /* =========================================
-   MEDICAMENTO
+   MEDICAMENTO (tarjeta de inicio)
    ========================================= */
 
 .medicamento {
@@ -507,6 +539,37 @@ body {
 .hora img {
     width: 21px;
     height: 21px;
+}
+
+
+/* =========================================
+   RECOMENDACIONES (reemplaza la lista suelta)
+   ========================================= */
+
+.lista-recomendaciones {
+    list-style: none;
+}
+
+.lista-recomendaciones li {
+    font-size: 12.5px;
+
+    color: #666;
+
+    margin-bottom: 8px;
+
+    padding-left: 16px;
+
+    position: relative;
+}
+
+.lista-recomendaciones li::before {
+    content: "•";
+
+    color: #d5bd00;
+
+    position: absolute;
+
+    left: 0;
 }
 
 
@@ -592,6 +655,8 @@ body {
     box-shadow: 0 5px 9px rgba(0, 0, 0, 0.25);
 
     cursor: pointer;
+
+    transition: transform 0.15s;
 }
 
 #btnEmergencia img {
@@ -625,7 +690,7 @@ body {
 
 
 /* =========================================
-   ELEMENTOS DEL TALLER
+   PANELES (medicamentos, recordatorios, voz)
    ========================================= */
 
 .panel-taller {
@@ -642,25 +707,30 @@ body {
 
 .panel-taller h3 {
     color: #087b8c;
+}
+
+.titulo-panel {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
 
     margin-bottom: 15px;
 }
 
-
-/* =========================================
-   BOTONES
-   ========================================= */
-
-.botones {
+.acciones-panel {
     display: flex;
 
-    gap: 10px;
-
-    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.botones button,
-#btnAgregar {
+
+/* =========================================
+   BOTONES GENERALES
+   ========================================= */
+
+button {
     border: none;
 
     background: #087b8c;
@@ -672,31 +742,69 @@ body {
     border-radius: 8px;
 
     cursor: pointer;
+
+    font-size: 13px;
 }
 
-.botones button:hover,
-#btnAgregar:hover {
+button:hover {
     background: #066c7b;
+}
+
+#btnEliminar {
+    background: #b5200d;
+}
+
+#btnEliminar:hover {
+    background: #981b0b;
 }
 
 
 /* =========================================
-   TABLA
+   FORMULARIO AGREGAR MEDICAMENTO
    ========================================= */
 
-.titulo-tabla {
+.form-medicamento {
     display: flex;
 
-    justify-content: space-between;
+    flex-wrap: wrap;
 
-    align-items: center;
+    gap: 8px;
 
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+
+    padding: 15px;
+
+    background: #edfafa;
+
+    border-radius: 10px;
 }
 
-.titulo-tabla h3 {
-    margin: 0;
+.form-medicamento input {
+    flex: 1;
+
+    min-width: 130px;
+
+    padding: 8px 10px;
+
+    border: 1px solid #b9e9ef;
+
+    border-radius: 6px;
+
+    font-size: 13px;
 }
+
+.form-medicamento button {
+    background: #55aee6;
+}
+
+.form-medicamento button:hover {
+    background: #3da5df;
+}
+
+
+/* =========================================
+   TABLA DE MEDICAMENTOS
+   ========================================= */
 
 .tabla-contenedor {
     overflow-x: auto;
@@ -729,20 +837,70 @@ td {
     font-size: 13px;
 }
 
+.btn-tomado {
+    padding: 6px 10px;
+
+    font-size: 11.5px;
+
+    background: #55aee6;
+}
+
+.btn-tomado:hover {
+    background: #3da5df;
+}
+
+/* Fila marcada como tomada */
+.medicamento-tomado td {
+    color: #aaa;
+
+    text-decoration: line-through;
+}
+
+.medicamento-tomado .btn-tomado {
+    background: #ccc;
+}
+
+/* Filas agregadas dinámicamente */
+.fila-dinamica {
+    background: #edfafa;
+}
+
 
 /* =========================================
-   API / WINDOW
+   BOTÓN FLOTANTE "VOLVER ARRIBA"
    ========================================= */
 
-#infoWindow,
-#resultadoApi {
-    padding: 15px;
+.btn-volver-arriba {
+    position: fixed;
 
-    background: #f5fafa;
+    bottom: 25px;
 
-    border-radius: 8px;
+    right: 25px;
 
-    color: #666;
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    background: #08798a;
+
+    color: white;
+
+    font-size: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+    z-index: 100;
+}
+
+.btn-volver-arriba:hover {
+    background: #066c7b;
 }
 
 

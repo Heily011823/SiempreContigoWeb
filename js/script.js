@@ -1,154 +1,259 @@
-document.addEventListener("DOMContentLoaded", () => {
+// ==========================================
+// 1. SELECCIONAR ELEMENTOS DEL DOM
+// (getElementById, querySelector, querySelectorAll)
+// ==========================================
 
-    // ==========================================
-    // 1. SELECCIÓN DE ELEMENTOS (getElementById, querySelector, querySelectorAll)
-    // ==========================================
+const titulo = document.getElementById("main-title");
+const menu = document.querySelector(".menu");
+const enlacesMenu = document.querySelectorAll(".menu-item");
+const contenedorDinamico = document.getElementById("contenedorDinamico");
 
-    // getElementById
-    const mainTitle = document.getElementById("main-title");
-    const welcomeMessage = document.getElementById("welcome-message");
-    const dynamicContainer = document.getElementById("dynamic-container");
-    const windowInfo = document.getElementById("window-info");
-    const apiResult = document.getElementById("api-result");
+console.log("Título:", titulo);
+console.log("Menú:", menu);
+console.log("Enlaces del menú:", enlacesMenu);
+console.log("Tabla de medicamentos:", contenedorDinamico);
 
-    // querySelector
-    const mainParagraph = document.querySelector("#main-paragraph");
-    const mainSidebar = document.querySelector("#main-sidebar");
-    const servicesList = document.querySelector("#services-list");
-    
-    // Botones
-    const btnChangeText = document.querySelector("#btn-change-text");
-    const btnToggleStyle = document.querySelector("#btn-toggle-style");
-    const btnDirectStyle = document.querySelector("#btn-direct-style");
-    const btnAdd = document.querySelector("#btn-add");
-    const btnRemove = document.querySelector("#btn-remove");
-    const btnFetchApi = document.querySelector("#btn-fetch-api");
+// Navegación jerárquica del DOM (se muestra solo en consola,
+// no necesita una sección aparte en la interfaz)
+console.log("Nodo padre de la tabla:", contenedorDinamico.parentElement);
+console.log("Hijos de la tabla:", contenedorDinamico.children);
+console.log("Primer medicamento:", contenedorDinamico.firstElementChild);
+console.log("Último medicamento:", contenedorDinamico.lastElementChild);
 
-    // querySelectorAll
-    const navItems = document.querySelectorAll(".nav-item");
 
-    // Mapeo en consola exigido por la guía
-    console.log("--- Elementos seleccionados ---");
-    console.log("Título Lateral (getElementById):", mainTitle);
-    console.log("Párrafo Bienvenida (querySelector):", mainParagraph);
-    console.log("Opciones de menú (querySelectorAll):", navItems);
+// ==========================================
+// 2. VER DETALLES DE LA CITA
+// (textContent, innerHTML, classList.add/remove, fetch + manejo de errores)
+// ==========================================
 
-    // ==========================================
-    // 2. NAVEGACIÓN JERÁRQUICA EN EL DOM
-    // ==========================================
-    console.log("--- Navegación Jerárquica ---");
-    console.log("Nodo padre del menú:", servicesList.parentNode);
-    console.log("Hijos del menú:", servicesList.children);
-    console.log("Primer hijo de la lista:", servicesList.firstElementChild);
-    console.log("Último hijo de la lista:", servicesList.lastElementChild);
+const btnDetallesCita = document.getElementById("btnDetallesCita");
+const detalleCita = document.getElementById("detalleCita");
+let detalleAbierto = false;
+let medicoCargado = false;
 
-    // ==========================================
-    // 3. USO DEL OBJETO WINDOW (Petición explícita)
-    // ==========================================
-    console.log("URL Actual (location.href):", window.location.href);
-    console.log("Posición de scroll (scrollY):", window.scrollY);
+btnDetallesCita.addEventListener("click", async function () {
+    detalleAbierto = !detalleAbierto;
 
-    function updateWindowSize() {
-        // Mostrar propiedad innerWidth dinámicamente en pantalla
-        windowInfo.textContent = `Ancho de ventana: ${window.innerWidth}px`;
-    }
-    updateWindowSize();
-    window.addEventListener("resize", updateWindowSize);
+    if (detalleAbierto) {
+        // Usamos classList.add()/remove() en vez de modificar .style
+        // directamente, porque así el CSS queda separado del JS
+        // y es más fácil de mantener y reutilizar.
+        detalleCita.classList.remove("oculto");
+        btnDetallesCita.textContent = "Ocultar detalles";
 
-    // ==========================================
-    // 4. CAMBIO DE TEXTO (textContent e innerHTML)
-    // ==========================================
-    let isChanged = false;
+        if (!medicoCargado) {
+            // Primer cambio de contenido: texto plano con textContent
+            detalleCita.textContent = "Cargando información del médico...";
 
-    btnChangeText.addEventListener("click", () => {
-        if (!isChanged) {
-            welcomeMessage.textContent = "¡Cita Confirmada con el Dr. Pérez!";
-            mainParagraph.innerHTML = "Tu cita está agendada para la dirección: <strong>Consultorio 302</strong>.";
-            isChanged = true;
-        } else {
-            welcomeMessage.textContent = "¡Buenos días, Cruz Elena!";
-            mainParagraph.textContent = "¿Cómo te sientes hoy?";
-            isChanged = false;
-        }
-    });
+            try {
+                const respuesta = await fetch("https://jsonplaceholder.typicode.com/users/1");
 
-    // ==========================================
-    // 5. ESTILOS: classList vs style (Con Explicación)
-    // ==========================================
-
-    /* 
-      EXPLICACIÓN - MEJORES PRÁCTICAS:
-      Es preferible usar classList.add/remove/toggle sobre style directos porque:
-      1. Mantiene separados la estructura (HTML/JS) de la presentación (CSS).
-      2. Permite reutilizar reglas completas y facilita el mantenimiento futuro del código.
-    */
-
-    // Modificación mediante classList.toggle
-    btnToggleStyle.addEventListener("click", () => {
-        mainSidebar.classList.toggle("dark-mode-sidebar");
-    });
-
-    // Modificación directa mediante style (Botón SOS)
-    btnDirectStyle.addEventListener("click", () => {
-        if (btnDirectStyle.style.backgroundColor === "orange") {
-            btnDirectStyle.style.backgroundColor = "";
-        } else {
-            btnDirectStyle.style.backgroundColor = "orange";
-        }
-    });
-
-    // ==========================================
-    // 6. AGREGAR Y ELIMINAR ELEMENTOS DINÁMICOS (remove / removeChild)
-    // ==========================================
-    let reminderCount = 2;
-
-    btnAdd.addEventListener("click", () => {
-        reminderCount++;
-        const newReminder = document.createElement("div");
-        newReminder.classList.add("reminder-item");
-        
-        newReminder.innerHTML = `
-            <span>💊 Tomar Agua #${reminderCount}</span>
-            <span class="time">5:00 p.m.</span>
-        `;
-        
-        dynamicContainer.appendChild(newReminder);
-    });
-
-    btnRemove.addEventListener("click", () => {
-        const lastReminder = dynamicContainer.lastElementChild;
-        if (lastReminder) {
-            // Uso de remove() para eliminar el último elemento dinámico
-            lastReminder.remove();
-        } else {
-            alert("No hay más recordatorios para eliminar.");
-        }
-    });
-
-    // ==========================================
-    // 7. CONSUMO DE API MEDIANTE FETCH
-    // ==========================================
-    btnFetchApi.addEventListener("click", () => {
-        apiResult.innerHTML = "<p>Cargando datos desde la API...</p>";
-
-        fetch("https://jsonplaceholder.typicode.com/todos/1")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error en la petición API");
+                if (!respuesta.ok) {
+                    throw new Error("No se pudo obtener la información.");
                 }
-                return response.json();
-            })
-            .then(data => {
-                // Mostrar datos consumidos en la tarjeta
-                apiResult.innerHTML = `
-                    <p>💊 <strong>${data.title}</strong></p>
-                    <p>⏰ Estado: ${data.completed ? 'Tomado' : 'Pendiente 10:00 a.m.'}</p>
-                `;
-            })
-            .catch(error => {
-                console.error("Error API:", error);
-                apiResult.innerHTML = `<p style="color:red;">Error al cargar datos de la API.</p>`;
-            });
-    });
 
+                const datos = await respuesta.json();
+
+                // Segundo cambio de contenido: con formato, usando innerHTML
+                detalleCita.innerHTML = `
+                    <p><strong>Médico:</strong> ${datos.name}</p>
+                    <p><strong>Consultorio:</strong> ${datos.address.city}</p>
+                    <p><strong>Contacto:</strong> ${datos.phone}</p>
+                `;
+
+                medicoCargado = true;
+                console.log("Datos del médico recibidos:", datos);
+
+            } catch (error) {
+                detalleCita.textContent = "No se pudo cargar la información del médico. Revisa tu conexión.";
+                console.error("Error al consultar la API:", error);
+            }
+        }
+
+    } else {
+        detalleCita.classList.add("oculto");
+        btnDetallesCita.textContent = "Ver detalles";
+    }
 });
+
+
+// ==========================================
+// 3. MARCAR MEDICAMENTO COMO TOMADO
+// (classList.toggle)
+// ==========================================
+
+contenedorDinamico.addEventListener("click", function (evento) {
+    if (evento.target.classList.contains("btn-tomado")) {
+        const fila = evento.target.closest("tr");
+
+        fila.classList.toggle("medicamento-tomado");
+
+        const yaTomado = fila.classList.contains("medicamento-tomado");
+        evento.target.textContent = yaTomado ? "Deshacer" : "Marcar tomado";
+
+        console.log("Medicamento actualizado:", fila);
+    }
+});
+
+
+// ==========================================
+// 4. AGREGAR Y ELIMINAR MEDICAMENTOS
+// (crear elementos dinámicamente y removeChild)
+// ==========================================
+
+const btnAgregar = document.getElementById("btnAgregar");
+const btnEliminar = document.getElementById("btnEliminar");
+const formMedicamento = document.getElementById("formMedicamento");
+
+btnAgregar.addEventListener("click", function () {
+    formMedicamento.classList.toggle("oculto");
+});
+
+formMedicamento.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+
+    const nombre = document.getElementById("inputNombre").value;
+    const frecuencia = document.getElementById("inputFrecuencia").value;
+    const inicio = document.getElementById("inputInicio").value;
+    const fin = document.getElementById("inputFin").value;
+    const dosis = document.getElementById("inputDosis").value;
+
+    const nuevaFila = document.createElement("tr");
+    nuevaFila.classList.add("fila-dinamica");
+
+    nuevaFila.innerHTML = `
+        <td>${nombre}</td>
+        <td>${frecuencia}</td>
+        <td>${inicio}</td>
+        <td>${fin}</td>
+        <td>${dosis}</td>
+        <td><button class="btn-tomado">Marcar tomado</button></td>
+    `;
+
+    contenedorDinamico.appendChild(nuevaFila);
+
+    formMedicamento.reset();
+    formMedicamento.classList.add("oculto");
+
+    console.log("Se agregó un nuevo medicamento. Hijos actuales:", contenedorDinamico.children);
+});
+
+btnEliminar.addEventListener("click", function () {
+    const ultimaFila = contenedorDinamico.lastElementChild;
+
+    if (ultimaFila) {
+        contenedorDinamico.removeChild(ultimaFila);
+        console.log("Se eliminó el último medicamento agregado.");
+    } else {
+        alert("No hay más medicamentos para eliminar.");
+    }
+});
+
+
+// ==========================================
+// 5. BOTÓN DE EMERGENCIA
+// (modificación directa de la propiedad style)
+// ==========================================
+
+const btnEmergencia = document.getElementById("btnEmergencia");
+
+btnEmergencia.addEventListener("click", function () {
+    // Aquí sí usamos .style directamente: es un efecto visual puntual
+    // e inmediato (una alerta momentánea), no un estilo reutilizable,
+    // así que no vale la pena crear una clase CSS solo para esto.
+    btnEmergencia.style.backgroundColor = "#7a1408";
+    btnEmergencia.style.transform = "scale(0.97)";
+
+    setTimeout(function () {
+        btnEmergencia.style.backgroundColor = "";
+        btnEmergencia.style.transform = "";
+    }, 300);
+
+    console.log("Alerta de emergencia enviada al cuidador.");
+});
+
+
+// ==========================================
+// 6. PROPIEDADES DEL OBJETO WINDOW
+// (scrollY, innerWidth, location.href)
+// ==========================================
+
+const btnVolverArriba = document.getElementById("btnVolverArriba");
+
+// scrollY: mostrado dinámicamente en pantalla mediante un botón
+// flotante que aparece/desaparece según el scroll del usuario
+window.addEventListener("scroll", function () {
+    if (window.scrollY > 200) {
+        btnVolverArriba.classList.remove("oculto");
+    } else {
+        btnVolverArriba.classList.add("oculto");
+    }
+});
+
+btnVolverArriba.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// innerWidth y location.href: se registran en consola
+console.log("Ancho de la ventana:", window.innerWidth);
+console.log("URL actual:", window.location.href);
+
+
+// ==========================================
+// 7. NAVEGACIÓN ENTRE SECCIONES
+// (usa location.href/hash para actualizar el título de la pestaña)
+// ==========================================
+
+const vistas = document.querySelectorAll(".vista");
+
+enlacesMenu.forEach(function (enlace) {
+    enlace.addEventListener("click", function (evento) {
+        evento.preventDefault();
+
+        const idDestino = enlace.getAttribute("href").substring(1);
+        const vistaDestino = document.getElementById(idDestino);
+
+        if (vistaDestino) {
+            vistas.forEach(function (vista) {
+                vista.classList.add("oculto");
+            });
+
+            vistaDestino.classList.remove("oculto");
+
+            enlacesMenu.forEach(function (item) {
+                item.classList.remove("activo");
+            });
+
+            enlace.classList.add("activo");
+
+            document.title = "Siempre Contigo - " + enlace.querySelector("span").textContent;
+
+            console.log("Se abrió la sección:", idDestino, "| URL:", window.location.href);
+        }
+    });
+});
+
+
+// ==========================================
+// 8. LECTURA DE VOZ
+// ==========================================
+
+const btnEscuchar = document.getElementById("btnEscuchar");
+
+btnEscuchar.addEventListener("click", function () {
+    if ("speechSynthesis" in window) {
+        const texto = new SpeechSynthesisUtterance(
+            "Bienvenida a Siempre Contigo. " +
+            "Recuerda revisar tus medicamentos y recordatorios."
+        );
+
+        texto.lang = "es-CO";
+
+        window.speechSynthesis.speak(texto);
+    } else {
+        alert("Tu navegador no permite la lectura de voz.");
+    }
+});
+
+
+console.log("JavaScript cargado correctamente.");
