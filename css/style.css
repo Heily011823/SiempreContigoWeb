@@ -278,7 +278,7 @@ body {
 .tarjetas {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
     gap: 13px;
 
@@ -337,6 +337,34 @@ body {
 
 .tarjeta-recomendaciones h3 {
     color: #c2aa00;
+}
+
+.tarjeta-clima {
+    border: 2px solid #55b8ef;
+}
+
+.tarjeta-clima h3 {
+    color: #55aee6;
+}
+
+.clima-contenido {
+    text-align: center;
+
+    margin-bottom: 40px;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+.temperatura-clima {
+    font-size: 26px;
+
+    font-weight: bold;
+
+    color: #087b8c;
+
+    margin-bottom: 4px;
 }
 
 
@@ -485,6 +513,14 @@ body {
 }
 
 .tarjeta-medicamentos .btn-detalles:hover {
+    background: #3da5df;
+}
+
+.tarjeta-clima .btn-detalles {
+    background: #55b7ed;
+}
+
+.tarjeta-clima .btn-detalles:hover {
     background: #3da5df;
 }
 

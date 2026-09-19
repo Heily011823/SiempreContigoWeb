@@ -105,7 +105,7 @@
                                 </div>
                             </div>
 
-                            <!-- Panel de detalles: se llena con fetch a una API -->
+                            <!-- Panel de detalles de la cita (sin API, solo texto) -->
                             <div id="detalleCita" class="detalle-cita oculto"></div>
 
                             <button class="btn-detalles" id="btnDetallesCita">Ver detalles</button>
@@ -127,6 +127,19 @@
                             </div>
 
                             <button class="btn-detalles">Ver detalles</button>
+                        </div>
+
+                        <!-- CLIMA DE HOY -->
+                        <div class="tarjeta tarjeta-clima">
+                            <h3>Clima de hoy</h3>
+                            <div class="linea"></div>
+
+                            <!-- Panel de clima: se llena con fetch a Open-Meteo -->
+                            <div id="climaContenido" class="clima-contenido">
+                                <p>Consultando el clima...</p>
+                            </div>
+
+                            <button class="btn-detalles" id="btnActualizarClima">Actualizar</button>
                         </div>
 
                         <!-- RECOMENDACIONES DE HOY -->
@@ -310,13 +323,11 @@
                     <section class="panel-taller">
 
                         <div class="recordatorio">
-                           
                             <span>Beber agua</span>
                             <strong>11:00 a.m.</strong>
                         </div>
 
                         <div class="recordatorio">
-                          
                             <span>Caminar</span>
                             <strong>4:00 p.m.</strong>
                         </div>

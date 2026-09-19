@@ -19,14 +19,13 @@ console.log("Último medicamento:", contenedorDinamico.lastElementChild);
 
 
 // 2. Ver detalles de la cita
-// (textContent, innerHTML, classList.add/remove, fetch + manejo de errores)
+// (textContent, innerHTML, classList.add/remove — sin API, solo información propia)
 
 const btnDetallesCita = document.getElementById("btnDetallesCita");
 const detalleCita = document.getElementById("detalleCita");
 let detalleAbierto = false;
-let medicoCargado = false;
 
-btnDetallesCita.addEventListener("click", async function () {
+btnDetallesCita.addEventListener("click", function () {
     detalleAbierto = !detalleAbierto;
 
     if (detalleAbierto) {
@@ -35,49 +34,12 @@ btnDetallesCita.addEventListener("click", async function () {
         detalleCita.classList.remove("oculto");
         btnDetallesCita.textContent = "Ocultar detalles";
 
-        if (!medicoCargado) {
-            // Primer cambio de contenido: texto plano con textContent
-            detalleCita.textContent = "Consultando el Registro Único de Talento Humano en Salud...";
-
-            try {
-                const respuesta = await fetch(
-                    "https://www.datos.gov.co/resource/my8c-6xkk.json?$limit=1"
-                );
-
-                if (!respuesta.ok) {
-                    throw new Error("No se pudo obtener la información.");
-                }
-
-                const datos = await respuesta.json();
-                console.log("Registro recibido:", datos[0]);
-
-                if (datos.length > 0) {
-                    const registro = datos[0];
-
-                    // Tomamos los primeros 4 campos que traiga la API
-                    // y los mostramos con el mismo formato visual
-                    // (etiqueta en negrita + valor) usando innerHTML.
-                    const claves = Object.keys(registro).slice(0, 4);
-
-                    let contenido = "";
-
-                    claves.forEach(function (clave) {
-                        const etiqueta = clave.replace(/_/g, " ");
-                        contenido += `<p><strong>${etiqueta}:</strong> ${registro[clave]}</p>`;
-                    });
-
-                    detalleCita.innerHTML = contenido;
-                } else {
-                    detalleCita.textContent = "No se encontraron registros.";
-                }
-
-                medicoCargado = true;
-
-            } catch (error) {
-                detalleCita.textContent = "No se pudo cargar la información. Revisa tu conexión.";
-                console.error("Error al consultar la API:", error);
-            }
-        }
+        // Usamos innerHTML porque el contenido incluye formato (negritas)
+        detalleCita.innerHTML = `
+            <p><strong>Consultorio:</strong> Clínica San Rafael, Manizales</p>
+            <p><strong>Motivo:</strong> Control general</p>
+            <p><strong>Recomendación:</strong> Llegar 15 minutos antes</p>
+        `;
     } else {
         detalleCita.classList.add("oculto");
         btnDetallesCita.textContent = "Ver detalles";
@@ -85,7 +47,61 @@ btnDetallesCita.addEventListener("click", async function () {
 });
 
 
-// 3. Marcar el medicamento como que se tomó
+// 3. Clima de hoy
+// (fetch + manejo de errores, con la API pública Open-Meteo)
+
+const climaContenido = document.getElementById("climaContenido");
+const btnActualizarClima = document.getElementById("btnActualizarClima");
+
+// Función de apoyo: traduce el código de clima de Open-Meteo a texto legible
+function interpretarClima(codigo) {
+    if (codigo === 0) return "Despejado. Buen día para salir.";
+    if (codigo <= 3) return "Parcialmente nublado.";
+    if (codigo <= 48) return "Con niebla, ten cuidado al salir.";
+    if (codigo <= 67) return "Con lluvia, lleva paraguas.";
+    if (codigo <= 86) return "Puede nevar (poco probable en tu zona).";
+    return "Clima variable, revisa antes de salir.";
+}
+
+async function cargarClima() {
+    // Primer cambio de contenido: texto plano con textContent
+    climaContenido.textContent = "Consultando el clima...";
+
+    try {
+        const respuesta = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude=5.07&longitude=-75.52&current=temperature_2m,weather_code&timezone=auto"
+        );
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo obtener el clima.");
+        }
+
+        const datos = await respuesta.json();
+        console.log("Datos del clima recibidos:", datos);
+
+        const temperatura = datos.current.temperature_2m;
+        const codigo = datos.current.weather_code;
+
+        // Segundo cambio de contenido: con formato, usando innerHTML
+        climaContenido.innerHTML = `
+            <p class="temperatura-clima">${temperatura} °C</p>
+            <p>${interpretarClima(codigo)}</p>
+        `;
+
+    } catch (error) {
+        climaContenido.textContent = "No se pudo cargar el clima. Revisa tu conexión.";
+        console.error("Error al consultar la API:", error);
+    }
+}
+
+// Se carga automáticamente al abrir la app...
+cargarClima();
+
+// ...y también se puede volver a consultar con el botón "Actualizar"
+btnActualizarClima.addEventListener("click", cargarClima);
+
+
+// 4. Marcar el medicamento como que se tomó
 // (classList.toggle)
 
 contenedorDinamico.addEventListener("click", function (evento) {
@@ -102,7 +118,7 @@ contenedorDinamico.addEventListener("click", function (evento) {
 });
 
 
-// 4. Agregar y eliminar medicamentos
+// 5. Agregar y eliminar medicamentos
 // (crear elementos dinámicamente y removeChild)
 
 const btnAgregar = document.getElementById("btnAgregar");
@@ -154,7 +170,7 @@ btnEliminar.addEventListener("click", function () {
 });
 
 
-// 5. Botón de emergencia
+// 6. Botón de emergencia
 // (modificación directa de la propiedad style)
 
 const btnEmergencia = document.getElementById("btnEmergencia");
@@ -175,7 +191,7 @@ btnEmergencia.addEventListener("click", function () {
 });
 
 
-// 6. Propiedades del objeto window
+// 7. Propiedades del objeto window
 // (scrollY, innerWidth, location.href)
 
 const btnVolverArriba = document.getElementById("btnVolverArriba");
@@ -198,7 +214,7 @@ console.log("Ancho de la ventana:", window.innerWidth);
 console.log("URL actual:", window.location.href);
 
 
-// 7. Navegación entre secciones
+// 8. Navegación entre secciones
 // (usa location.href/hash para actualizar el título de la pestaña)
 
 const vistas = document.querySelectorAll(".vista");
@@ -231,7 +247,7 @@ enlacesMenu.forEach(function (enlace) {
 });
 
 
-// 8. Lectura de voz
+// 9. Lectura de voz
 
 const btnEscuchar = document.getElementById("btnEscuchar");
 
