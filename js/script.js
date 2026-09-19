@@ -11,7 +11,7 @@ console.log("Menú:", menu);
 console.log("Enlaces del menú:", enlacesMenu);
 console.log("Tabla de medicamentos:", contenedorDinamico);
 
-// Navegación jerárquica del DOM (se muestra solo en consola
+// Navegación jerárquica del DOM (se muestra solo en consola)
 console.log("Nodo padre de la tabla:", contenedorDinamico.parentElement);
 console.log("Hijos de la tabla:", contenedorDinamico.children);
 console.log("Primer medicamento:", contenedorDinamico.firstElementChild);
@@ -30,36 +30,54 @@ btnDetallesCita.addEventListener("click", async function () {
     detalleAbierto = !detalleAbierto;
 
     if (detalleAbierto) {
+        // Mejor práctica: usamos classList.add()/remove() en vez de .style
+        // directamente, porque mantiene el CSS separado del JS.
         detalleCita.classList.remove("oculto");
         btnDetallesCita.textContent = "Ocultar detalles";
 
         if (!medicoCargado) {
-            detalleCita.textContent = "Cargando información del médico...";
+            // Primer cambio de contenido: texto plano con textContent
+            detalleCita.textContent = "Consultando el Registro Único de Talento Humano en Salud...";
 
             try {
-                const respuesta = await fetch("https://jsonplaceholder.typicode.com/users/1");
+                const respuesta = await fetch(
+                    "https://www.datos.gov.co/resource/my8c-6xkk.json?$limit=1"
+                );
 
                 if (!respuesta.ok) {
                     throw new Error("No se pudo obtener la información.");
                 }
 
                 const datos = await respuesta.json();
+                console.log("Registro recibido:", datos[0]);
 
-                detalleCita.innerHTML = `
-                    <p><strong>Médico:</strong> ${datos.name}</p>
-                    <p><strong>Consultorio:</strong> ${datos.address.city}</p>
-                    <p><strong>Contacto:</strong> ${datos.phone}</p>
-                `;
+                if (datos.length > 0) {
+                    const registro = datos[0];
+
+                    // Tomamos los primeros 4 campos que traiga la API
+                    // y los mostramos con el mismo formato visual
+                    // (etiqueta en negrita + valor) usando innerHTML.
+                    const claves = Object.keys(registro).slice(0, 4);
+
+                    let contenido = "";
+
+                    claves.forEach(function (clave) {
+                        const etiqueta = clave.replace(/_/g, " ");
+                        contenido += `<p><strong>${etiqueta}:</strong> ${registro[clave]}</p>`;
+                    });
+
+                    detalleCita.innerHTML = contenido;
+                } else {
+                    detalleCita.textContent = "No se encontraron registros.";
+                }
 
                 medicoCargado = true;
-                console.log("Datos del médico recibidos:", datos);
 
             } catch (error) {
-                detalleCita.textContent = "No se pudo cargar la información del médico. Revisa tu conexión.";
+                detalleCita.textContent = "No se pudo cargar la información. Revisa tu conexión.";
                 console.error("Error al consultar la API:", error);
             }
         }
-
     } else {
         detalleCita.classList.add("oculto");
         btnDetallesCita.textContent = "Ver detalles";
@@ -67,7 +85,7 @@ btnDetallesCita.addEventListener("click", async function () {
 });
 
 
-// 3. Marcar el medicamento como que se tomo
+// 3. Marcar el medicamento como que se tomó
 // (classList.toggle)
 
 contenedorDinamico.addEventListener("click", function (evento) {
@@ -82,7 +100,6 @@ contenedorDinamico.addEventListener("click", function (evento) {
         console.log("Medicamento actualizado:", fila);
     }
 });
-
 
 
 // 4. Agregar y eliminar medicamentos
@@ -136,12 +153,16 @@ btnEliminar.addEventListener("click", function () {
     }
 });
 
+
 // 5. Botón de emergencia
 // (modificación directa de la propiedad style)
 
 const btnEmergencia = document.getElementById("btnEmergencia");
 
 btnEmergencia.addEventListener("click", function () {
+    // Aquí usamos .style directamente porque es un efecto visual
+    // puntual e inmediato (una alerta momentánea), no un estilo
+    // reutilizable, así que no vale la pena crear una clase CSS solo para esto.
     btnEmergencia.style.backgroundColor = "#7a1408";
     btnEmergencia.style.transform = "scale(0.97)";
 
@@ -154,11 +175,12 @@ btnEmergencia.addEventListener("click", function () {
 });
 
 
-// 6. Propiedades del objeto windows
+// 6. Propiedades del objeto window
 // (scrollY, innerWidth, location.href)
 
 const btnVolverArriba = document.getElementById("btnVolverArriba");
 
+// scrollY: mostrado dinámicamente en pantalla con un botón flotante
 window.addEventListener("scroll", function () {
     if (window.scrollY > 200) {
         btnVolverArriba.classList.remove("oculto");
@@ -171,11 +193,12 @@ btnVolverArriba.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+// innerWidth y location.href: se registran en consola
 console.log("Ancho de la ventana:", window.innerWidth);
 console.log("URL actual:", window.location.href);
 
 
-// 7. Navegación por las secciones
+// 7. Navegación entre secciones
 // (usa location.href/hash para actualizar el título de la pestaña)
 
 const vistas = document.querySelectorAll(".vista");

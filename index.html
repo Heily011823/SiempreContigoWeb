@@ -12,7 +12,7 @@
 
     <div class="app">
 
-        <!-- Barra lateral -->
+        <!-- BARRA LATERAL -->
         <aside class="sidebar">
 
             <div class="logo">
@@ -23,11 +23,16 @@
                 </div>
             </div>
 
-            <!-- Menú -->
+            <!-- MENÚ -->
             <nav class="menu">
                 <a href="#inicio" class="menu-item activo">
                     <img src="images/Inicio.png" alt="Inicio">
                     <span>Inicio</span>
+                </a>
+
+                <a href="#citas" class="menu-item">
+                    <img src="images/calendario.png" alt="Citas">
+                    <span>Citas</span>
                 </a>
 
                 <a href="#medicamentos" class="menu-item">
@@ -46,7 +51,7 @@
                 </a>
             </nav>
 
-            <!-- Cerrar sesión -->
+            <!-- CERRAR SESIÓN -->
             <button class="cerrar-sesion">
                 <img src="images/cerrar-sesion.png" alt="Cerrar sesión">
                 <span>Cerrar Sesión</span>
@@ -54,20 +59,22 @@
 
         </aside>
 
+        <!-- CONTENIDO -->
         <div class="contenido">
 
-            <!-- Barra superior -->
+            <!-- BARRA SUPERIOR -->
             <header class="topbar">
                 <div class="usuario">
                     <img src="images/usuario.png" alt="Usuario">
                     <span>Cruz Elena</span>
+                    <span class="flecha">⌄</span>
                 </div>
             </header>
 
-            <!-- Contenido principal -->
+            <!-- CONTENIDO PRINCIPAL -->
             <main class="main-content">
 
-                <!-- Inicio -->
+                <!-- INICIO -->
                 <section id="inicio" class="vista">
 
                     <section class="saludo">
@@ -75,28 +82,24 @@
                         <p>¿Cómo te sientes hoy?</p>
                     </section>
 
-                    <!-- Tarjetas -->
+                    <!-- TARJETAS -->
                     <section class="tarjetas">
 
-                        <!-- Próxima cita -->
+                        <!-- PRÓXIMA CITA -->
                         <div class="tarjeta tarjeta-cita" id="tarjetaCita">
                             <h3>Próxima cita</h3>
                             <div class="linea"></div>
 
                             <div class="contenido-cita">
-                                
-
                                 <div>
                                     <strong>Dr. Juan Pérez</strong>
                                     <p>Medicina general</p>
 
                                     <div class="dato">
-
                                         <span>Viernes, 24 de Mayo</span>
                                     </div>
 
                                     <div class="dato">
-                                    
                                         <span>10:00 a.m.</span>
                                     </div>
                                 </div>
@@ -108,19 +111,16 @@
                             <button class="btn-detalles" id="btnDetallesCita">Ver detalles</button>
                         </div>
 
-                        <!-- Medicamentos actuales -->
+                        <!-- MEDICAMENTOS DE HOY -->
                         <div class="tarjeta tarjeta-medicamentos">
                             <h3>Medicamentos de hoy</h3>
                             <div class="linea"></div>
 
                             <div class="medicamento">
-                               
-
                                 <div>
                                     <p>Acetaminofén</p>
 
                                     <div class="hora">
-                              
                                         <span>10:00 a.m.</span>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                             <button class="btn-detalles">Ver detalles</button>
                         </div>
 
-                        <!-- Recomendaciones actuales -->
+                        <!-- RECOMENDACIONES DE HOY -->
                         <div class="tarjeta tarjeta-recomendaciones">
                             <h3>Recomendaciones de hoy</h3>
                             <div class="linea"></div>
@@ -143,7 +143,7 @@
 
                     </section>
 
-                    <!-- Emergencia -->
+                    <!-- EMERGENCIA -->
                     <section class="emergencia-panel">
                         <button id="btnEmergencia">
                             <img src="images/Emergencia.png" alt="Emergencia">
@@ -157,7 +157,70 @@
 
                 </section>
 
-                <!-- Medicamentos -->
+                <!-- CITAS -->
+                <section id="citas" class="vista oculto">
+
+                    <h2 class="titulo-seccion">Mis citas</h2>
+
+                    <p class="descripcion-seccion">
+                        Aquí puedes consultar todas tus citas médicas programadas.
+                    </p>
+
+                    <section class="panel-taller">
+                        <h3>Citas programadas</h3>
+
+                        <div class="tabla-contenedor">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Médico</th>
+                                        <th>Especialidad</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="contenedorCitas">
+                                    <tr>
+                                        <td>Dr. Juan Pérez</td>
+                                        <td>Medicina general</td>
+                                        <td>Viernes, 24 de Mayo</td>
+                                        <td>10:00 a.m.</td>
+                                        <td><span class="estado-cita proxima">Próxima</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Dra. Laura Gómez</td>
+                                        <td>Cardiología</td>
+                                        <td>Lunes, 3 de Junio</td>
+                                        <td>2:00 p.m.</td>
+                                        <td><span class="estado-cita proxima">Próxima</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Dr. Andrés Ruiz</td>
+                                        <td>Oftalmología</td>
+                                        <td>Martes, 5 de Mayo</td>
+                                        <td>9:00 a.m.</td>
+                                        <td><span class="estado-cita realizada">Realizada</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Dra. Marcela Ortiz</td>
+                                        <td>Nutrición</td>
+                                        <td>Jueves, 16 de Abril</td>
+                                        <td>3:30 p.m.</td>
+                                        <td><span class="estado-cita realizada">Realizada</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                </section>
+
+                <!-- MEDICAMENTOS -->
                 <section id="medicamentos" class="vista oculto">
 
                     <h2 class="titulo-seccion">Mis medicamentos</h2>
@@ -166,7 +229,7 @@
                         Aquí puedes consultar los medicamentos que tienes programados.
                     </p>
 
-                    <!-- Tablas de los medicamentos -->
+                    <!-- TABLA DE MEDICAMENTOS -->
                     <section class="panel-taller">
 
                         <div class="titulo-panel">
@@ -235,7 +298,7 @@
 
                 </section>
 
-                <!-- Recordatorios -->
+                <!-- RECORDATORIOS -->
                 <section id="recordatorios" class="vista oculto">
 
                     <h2 class="titulo-seccion">Mis recordatorios</h2>
@@ -247,13 +310,13 @@
                     <section class="panel-taller">
 
                         <div class="recordatorio">
-                          
+                           
                             <span>Beber agua</span>
                             <strong>11:00 a.m.</strong>
                         </div>
 
                         <div class="recordatorio">
-                           
+                          
                             <span>Caminar</span>
                             <strong>4:00 p.m.</strong>
                         </div>
@@ -262,7 +325,7 @@
 
                 </section>
 
-                <!-- Lectura de voz -->
+                <!-- LECTURA DE VOZ -->
                 <section id="voz" class="vista oculto">
 
                     <h2 class="titulo-seccion">Lectura de voz</h2>
@@ -285,9 +348,10 @@
 
     </div>
 
-    <!-- Scroll -->
+    <!-- BOTÓN FLOTANTE: aparece según window.scrollY -->
     <button id="btnVolverArriba" class="btn-volver-arriba oculto" title="Volver arriba">↑</button>
 
+    <!-- ARCHIVO JAVASCRIPT -->
     <script src="js/script.js"></script>
 
 </body>

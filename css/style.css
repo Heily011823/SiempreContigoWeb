@@ -16,14 +16,18 @@ body {
 }
 
 
-/* Clase para ocultar elementos */
+/* =========================================
+   CLASE PARA OCULTAR ELEMENTOS (faltaba)
+   ========================================= */
 
 .oculto {
     display: none !important;
 }
 
 
-/* Barra lateral */
+/* =========================================
+   BARRA LATERAL
+   ========================================= */
 
 .sidebar {
     width: 247px;
@@ -40,7 +44,9 @@ body {
 }
 
 
-/* Logo */
+/* =========================================
+   LOGO
+   ========================================= */
 
 .logo {
     text-align: center;
@@ -83,7 +89,9 @@ body {
 }
 
 
-/* Menú */
+/* =========================================
+   MENÚ
+   ========================================= */
 
 .menu {
     margin-top: 14px;
@@ -130,7 +138,9 @@ body {
 }
 
 
-/* Cerrar Sesión */
+/* =========================================
+   CERRAR SESIÓN
+   ========================================= */
 
 .cerrar-sesion {
     margin-top: auto;
@@ -170,7 +180,9 @@ body {
 }
 
 
-/* Contenido */
+/* =========================================
+   CONTENIDO
+   ========================================= */
 
 .contenido {
     flex: 1;
@@ -181,7 +193,9 @@ body {
 }
 
 
-/* Barra superior */
+/* =========================================
+   BARRA SUPERIOR
+   ========================================= */
 
 .topbar {
     height: 76px;
@@ -225,14 +239,18 @@ body {
 }
 
 
-/* Contenido principal */
+/* =========================================
+   CONTENIDO PRINCIPAL
+   ========================================= */
 
 .main-content {
     padding: 20px 38px 35px;
 }
 
 
-/* Saludo de bienvenida */
+/* =========================================
+   SALUDO
+   ========================================= */
 
 .saludo {
     margin-bottom: 20px;
@@ -253,7 +271,9 @@ body {
 }
 
 
-/* Tarjetas */
+/* =========================================
+   TARJETAS
+   ========================================= */
 
 .tarjetas {
     display: grid;
@@ -266,7 +286,9 @@ body {
 }
 
 
-/* Tarjeta general */
+/* =========================================
+   TARJETA GENERAL
+   ========================================= */
 
 .tarjeta {
     min-height: 187px;
@@ -289,7 +311,9 @@ body {
 }
 
 
-/* Colores de las tarjetas con la información */
+/* =========================================
+   COLORES DE LAS TARJETAS
+   ========================================= */
 
 .tarjeta-cita {
     border: 2px solid #9c48d2;
@@ -316,7 +340,9 @@ body {
 }
 
 
-/* Línea */
+/* =========================================
+   LÍNEA
+   ========================================= */
 
 .linea {
     width: 100%;
@@ -339,7 +365,9 @@ body {
 }
 
 
-/* Citas */
+/* =========================================
+   CITA
+   ========================================= */
 
 .contenido-cita {
     display: flex;
@@ -392,7 +420,9 @@ body {
 }
 
 
-/* Detalle de cada cita */
+/* =========================================
+   DETALLE DE LA CITA (cargado con fetch)
+   ========================================= */
 
 .detalle-cita {
     margin-top: 10px;
@@ -414,7 +444,9 @@ body {
 }
 
 
-/* El botón de ver detalles */
+/* =========================================
+   BOTÓN VER DETALLES
+   ========================================= */
 
 .btn-detalles {
     position: absolute;
@@ -457,7 +489,9 @@ body {
 }
 
 
-/* Medicamentos */
+/* =========================================
+   MEDICAMENTO (tarjeta de inicio)
+   ========================================= */
 
 .medicamento {
     height: 65px;
@@ -508,7 +542,9 @@ body {
 }
 
 
-/* Recomendaciones */
+/* =========================================
+   RECOMENDACIONES (reemplaza la lista suelta)
+   ========================================= */
 
 .lista-recomendaciones {
     list-style: none;
@@ -537,7 +573,9 @@ body {
 }
 
 
-/* Recordatorios */
+/* =========================================
+   RECORDATORIOS
+   ========================================= */
 
 .recordatorio {
     height: 40px;
@@ -581,7 +619,9 @@ body {
 }
 
 
-/* Emergencia */
+/* =========================================
+   EMERGENCIA
+   ========================================= */
 
 .emergencia-panel {
     display: flex;
@@ -649,7 +689,9 @@ body {
 }
 
 
-/* Paneles de medicamentos, recordatorios y voz */
+/* =========================================
+   PANELES (medicamentos, recordatorios, voz)
+   ========================================= */
 
 .panel-taller {
     margin-top: 30px;
@@ -684,7 +726,9 @@ body {
 }
 
 
-/* Botones */
+/* =========================================
+   BOTONES GENERALES
+   ========================================= */
 
 button {
     border: none;
@@ -715,7 +759,9 @@ button:hover {
 }
 
 
-/* Formulario para agregar un medicamento */
+/* =========================================
+   FORMULARIO AGREGAR MEDICAMENTO
+   ========================================= */
 
 .form-medicamento {
     display: flex;
@@ -756,7 +802,9 @@ button:hover {
 }
 
 
-/* Tabla de medicamentos */
+/* =========================================
+   TABLA DE MEDICAMENTOS
+   ========================================= */
 
 .tabla-contenedor {
     overflow-x: auto;
@@ -789,6 +837,30 @@ td {
     font-size: 13px;
 }
 
+.estado-cita {
+    display: inline-block;
+
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11.5px;
+
+    font-weight: bold;
+}
+
+.estado-cita.proxima {
+    background: #f0e3fa;
+
+    color: #9140c6;
+}
+
+.estado-cita.realizada {
+    background: #eee;
+
+    color: #888;
+}
+
 .btn-tomado {
     padding: 6px 10px;
 
@@ -818,7 +890,9 @@ td {
 }
 
 
-/* Botón volver arriba */
+/* =========================================
+   BOTÓN FLOTANTE "VOLVER ARRIBA"
+   ========================================= */
 
 .btn-volver-arriba {
     position: fixed;
@@ -854,7 +928,9 @@ td {
 }
 
 
-/* Responsive */
+/* =========================================
+   RESPONSIVE
+   ========================================= */
 
 @media (max-width: 900px) {
 
