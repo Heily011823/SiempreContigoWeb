@@ -69,7 +69,7 @@ async function cargarClima() {
 
     try {
         const respuesta = await fetch(
-            "https://api.open-meteo.com/v1/forecast?latitude=5.07&longitude=-75.52&current=temperature_2m,weather_code&timezone=auto"
+            "https://api.open-meteo.com/v1/forecast?latitude=5.0689&longitude=-75.5174&elevation=2150&current=temperature_2m,weather_code&timezone=auto"
         );
 
         if (!respuesta.ok) {
