@@ -1,0 +1,56 @@
+<main class="auth-fondo">
+  <section class="auth-tarjeta" aria-labelledby="titulo-registro">
+    <img class="logo-auth" src="images/Logo2.png" alt="Logo de Siempre Contigo" />
+    <h1 id="titulo-registro">Crear cuenta</h1>
+
+    <form class="formulario" [formGroup]="form" (ngSubmit)="registrar()" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" type="text" autocomplete="name" formControlName="nombre" [class.invalido]="invalido('nombre')" />
+        @if (invalido('nombre')) {
+          <small class="error">
+            @if (form.controls.nombre.hasError('required')) { El nombre es obligatorio. } @else { Mínimo 3 caracteres. }
+          </small>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo</label>
+        <input id="correo" type="email" autocomplete="email" formControlName="correo" [class.invalido]="invalido('correo')" />
+        @if (invalido('correo')) {
+          <small class="error">
+            @if (form.controls.correo.hasError('required')) { El correo es obligatorio. } @else { Escribe un correo válido. }
+          </small>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <input id="clave" type="password" autocomplete="new-password" formControlName="clave" [class.invalido]="invalido('clave')" />
+        @if (invalido('clave')) {
+          <small class="error">
+            @if (form.controls.clave.hasError('required')) { La contraseña es obligatoria. } @else { Mínimo 8 caracteres. }
+          </small>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="confirmar">Confirmar contraseña</label>
+        <input id="confirmar" type="password" autocomplete="new-password" formControlName="confirmar" [class.invalido]="invalido('confirmar') || (form.hasError('clavesDistintas') && form.controls.confirmar.touched)" />
+        @if (invalido('confirmar')) {
+          <small class="error">Confirma tu contraseña.</small>
+        } @else if (form.hasError('clavesDistintas') && form.controls.confirmar.touched) {
+          <small class="error">Las contraseñas no coinciden.</small>
+        }
+      </div>
+
+      @if (error()) {
+        <p class="mensaje-error" role="alert">{{ error() }}</p>
+      }
+
+      <button type="submit" [disabled]="form.invalid || enviando()">Registrarme</button>
+    </form>
+
+    <p class="pie-auth">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </section>
+</main>

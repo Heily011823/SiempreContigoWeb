@@ -1,0 +1,11 @@
+<div class="app">
+  <app-menu [abierto]="menuAbierto()" (cerrar)="cerrarMenu()" />
+
+  <div class="contenido">
+    <app-barra-superior [menuAbierto]="menuAbierto()" (alternarMenu)="alternarMenu()" />
+    <main class="principal">
+      <router-outlet />
+    </main>
+    <app-pie />
+  </div>
+</div>

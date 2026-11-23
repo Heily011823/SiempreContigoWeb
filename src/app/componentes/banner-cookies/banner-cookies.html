@@ -1,0 +1,16 @@
+@if (cookies.bannerVisible()) {
+  <aside class="banner" role="dialog" aria-labelledby="titulo-cookies">
+    <div>
+      <h2 id="titulo-cookies">Cookies</h2>
+      <p>
+        Usamos cookies para recordar tu correo al iniciar sesión y tu preferencia de tamaño de texto.
+        Puedes aceptarlas, rechazarlas o borrarlas cuando quieras.
+      </p>
+    </div>
+    <div class="botones">
+      <button type="button" (click)="cookies.aceptar()">Aceptar</button>
+      <button type="button" class="secundario" (click)="cookies.rechazar()">Rechazar</button>
+      <button type="button" class="peligro" (click)="borrar()">Borrar mis cookies</button>
+    </div>
+  </aside>
+}

@@ -1,0 +1,20 @@
+<section class="tarjeta" aria-labelledby="titulo-ubicacion">
+  <h3 id="titulo-ubicacion">Mi sede más cercana</h3>
+  <div #mapa class="mapa" role="img" aria-label="Mapa de Manizales con las sedes"></div>
+
+  <div class="estado" aria-live="polite">
+    @if (cargando()) {
+      <p>Buscando tu ubicación...</p>
+    } @else if (error()) {
+      <p class="mensaje-error" role="alert">{{ error() }}</p>
+    } @else if (cercana(); as c) {
+      <p>
+        Tu sede más cercana es <strong>{{ c.sede.nombre }}</strong> a {{ c.km.toFixed(1) }} km.
+      </p>
+    } @else {
+      <p>Permite tu ubicación para saber cuál es la sede más cercana.</p>
+    }
+  </div>
+
+  <button type="button" (click)="buscar()" [disabled]="cargando()">Usar mi ubicación</button>
+</section>

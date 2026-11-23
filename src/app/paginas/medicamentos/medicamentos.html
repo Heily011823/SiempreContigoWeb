@@ -1,0 +1,89 @@
+<h2 class="titulo-seccion">Mis medicamentos</h2>
+<p class="descripcion-seccion">Aquí puedes consultar los medicamentos que tienes programados.</p>
+
+<section class="panel" aria-labelledby="titulo-meds">
+  <div class="titulo-panel">
+    <h3 id="titulo-meds">Medicamentos registrados</h3>
+    <div class="acciones">
+      <button type="button" (click)="alternarFormulario()" [attr.aria-expanded]="formularioAbierto()">+ Agregar</button>
+      <button type="button" class="peligro" (click)="deshacerUltimo()">Deshacer último</button>
+    </div>
+  </div>
+
+  <p class="mensaje-ok" role="status" [hidden]="!aviso()">{{ aviso() }}</p>
+
+  @if (formularioAbierto()) {
+    <form class="form-fila" [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" formControlName="nombre" [class.invalido]="invalido('nombre')" />
+        @if (invalido('nombre')) {
+          <small class="error">Escribe el nombre (mínimo 3 letras).</small>
+        }
+      </div>
+      <div class="campo">
+        <label for="frecuencia">¿Cada cuánto?</label>
+        <input id="frecuencia" type="text" formControlName="frecuencia" [class.invalido]="invalido('frecuencia')" />
+        @if (invalido('frecuencia')) {
+          <small class="error">Indica la frecuencia.</small>
+        }
+      </div>
+      <div class="campo">
+        <label for="inicio">Fecha inicio</label>
+        <input id="inicio" type="date" formControlName="inicio" [class.invalido]="invalido('inicio')" />
+        @if (invalido('inicio')) {
+          <small class="error">Elige la fecha de inicio.</small>
+        }
+      </div>
+      <div class="campo">
+        <label for="fin">Fecha fin</label>
+        <input id="fin" type="date" formControlName="fin" [class.invalido]="invalido('fin')" />
+        @if (invalido('fin')) {
+          <small class="error">Elige la fecha de fin.</small>
+        }
+        @if (form.hasError('rangoFechas') && form.controls.fin.touched) {
+          <small class="error">La fecha fin no puede ser anterior al inicio.</small>
+        }
+      </div>
+      <div class="campo">
+        <label for="dosis">Dosis</label>
+        <input id="dosis" type="text" formControlName="dosis" [class.invalido]="invalido('dosis')" />
+        @if (invalido('dosis')) {
+          <small class="error">Indica la dosis.</small>
+        }
+      </div>
+      <button type="submit" [disabled]="form.invalid">Guardar</button>
+    </form>
+  }
+
+  <div class="tabla-contenedor">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">¿Cada cuánto?</th>
+          <th scope="col">Fecha inicio</th>
+          <th scope="col">Fecha fin</th>
+          <th scope="col">Dosis</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (med of datos.medicamentos(); track med.id) {
+          <tr [style.opacity]="med.tomado ? 0.55 : 1">
+            <td [style.text-decoration]="med.tomado ? 'line-through' : 'none'">{{ med.nombre }}</td>
+            <td>{{ med.frecuencia }}</td>
+            <td>{{ med.inicio | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ med.fin | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ med.dosis }}</td>
+            <td>
+              <button type="button" (click)="datos.alternarTomado(med.id)">
+                {{ med.tomado ? 'Deshacer' : 'Marcar tomado' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

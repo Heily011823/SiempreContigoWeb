@@ -1,0 +1,28 @@
+<header class="topbar">
+  <button
+    type="button"
+    class="hamburguesa"
+    aria-controls="menu-lateral"
+    [attr.aria-expanded]="menuAbierto()"
+    aria-label="Abrir o cerrar el menú"
+    (click)="alternarMenu.emit()"
+  >
+    <span aria-hidden="true">☰</span>
+  </button>
+
+  <div class="derecha">
+    <button
+      type="button"
+      class="secundario"
+      [attr.aria-pressed]="preferencias.textoGrande()"
+      (click)="preferencias.alternarTexto()"
+    >
+      {{ preferencias.textoGrande() ? 'Texto normal' : 'Texto grande' }}
+    </button>
+
+    <div class="usuario">
+      <img src="images/usuario.png" alt="" />
+      <span>{{ auth.sesion()?.nombre }}</span>
+    </div>
+  </div>
+</header>

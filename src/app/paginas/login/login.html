@@ -1,0 +1,37 @@
+<main class="auth-fondo">
+  <section class="auth-tarjeta" aria-labelledby="titulo-login">
+    <img class="logo-auth" src="images/Logo2.png" alt="Logo de Siempre Contigo" />
+    <h1 id="titulo-login">Iniciar sesión</h1>
+
+    <form class="formulario" [formGroup]="form" (ngSubmit)="entrar()" novalidate>
+      <div class="campo">
+        <label for="correo">Correo</label>
+        <input id="correo" type="email" autocomplete="email" formControlName="correo" [class.invalido]="form.controls.correo.invalid && form.controls.correo.touched" />
+        @if (form.controls.correo.touched && form.controls.correo.invalid) {
+          <small class="error">Escribe un correo válido.</small>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <input id="clave" type="password" autocomplete="current-password" formControlName="clave" [class.invalido]="form.controls.clave.invalid && form.controls.clave.touched" />
+        @if (form.controls.clave.touched && form.controls.clave.invalid) {
+          <small class="error">Escribe tu contraseña.</small>
+        }
+      </div>
+
+      <label class="campo-check">
+        <input type="checkbox" formControlName="recordar" />
+        Recordar mi correo (usa cookies)
+      </label>
+
+      @if (error()) {
+        <p class="mensaje-error" role="alert">{{ error() }}</p>
+      }
+
+      <button type="submit" [disabled]="form.invalid || enviando()">Entrar</button>
+    </form>
+
+    <p class="pie-auth">¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+  </section>
+</main>

@@ -1,0 +1,87 @@
+<section class="saludo">
+  <h2>¡{{ saludo }}, {{ nombre }}!</h2>
+  <p>¿Cómo te sientes hoy?</p>
+</section>
+
+<section class="tarjetas" aria-label="Resumen del día">
+  <article class="tarjeta cita">
+    <h3>Próxima cita</h3>
+    @if (datos.proximaCita(); as cita) {
+      <strong>{{ cita.medico }}</strong>
+      <p>{{ cita.especialidad }}</p>
+      <p class="dato">{{ cita.fecha }}</p>
+      <p class="dato">{{ cita.hora }}</p>
+      @if (detalleAbierto()) {
+        <div class="detalle">
+          <p><strong>Consultorio:</strong> Clínica San Rafael, Manizales</p>
+          <p><strong>Motivo:</strong> Control general</p>
+          <p><strong>Recomendación:</strong> Llegar 15 minutos antes</p>
+        </div>
+      }
+      <button type="button" (click)="alternarDetalle()" [attr.aria-expanded]="detalleAbierto()">
+        {{ detalleAbierto() ? 'Ocultar detalles' : 'Ver detalles' }}
+      </button>
+    } @else {
+      <p>No tienes citas próximas.</p>
+    }
+  </article>
+
+  <article class="tarjeta medicamentos">
+    <h3>Medicamentos de hoy</h3>
+    @if (datos.medicamentoPendiente(); as med) {
+      <div class="medicamento">
+        <p>{{ med.nombre }}</p>
+        <span class="dato">{{ med.frecuencia }} · {{ med.dosis }}</span>
+      </div>
+    } @else {
+      <p>¡Ya tomaste todos tus medicamentos!</p>
+    }
+  </article>
+
+  <article class="tarjeta clima">
+    <h3>Clima de hoy</h3>
+    <div class="clima-contenido" aria-live="polite">
+      @switch (estadoClima()) {
+        @case ('cargando') {
+          <p>Consultando el clima...</p>
+        }
+        @case ('error') {
+          <p>No se pudo cargar el clima. Revisa tu conexión.</p>
+        }
+        @default {
+          <p class="temperatura">{{ infoClima()?.temperatura }} °C</p>
+          <p>{{ infoClima()?.descripcion }}</p>
+        }
+      }
+    </div>
+    <button type="button" (click)="cargarClima()">Actualizar</button>
+  </article>
+
+  <article class="tarjeta recomendaciones">
+    <h3>Recomendaciones de hoy</h3>
+    <ul>
+      @for (texto of recomendaciones; track texto) {
+        <li>{{ texto }}</li>
+      }
+    </ul>
+  </article>
+
+  <div class="ancho-total">
+    <app-tarjeta-ubicacion />
+  </div>
+</section>
+
+<section class="emergencia">
+  <button type="button" class="btn-emergencia" [class.presionado]="alertaEnviada()" (click)="pedirAyuda()">
+    <img src="images/Emergencia.png" alt="" />
+    <span class="textos">
+      <strong>EMERGENCIA</strong>
+      <span>Solicitar ayuda</span>
+    </span>
+  </button>
+  <p class="aviso" role="status" aria-live="polite">
+    @if (alertaEnviada()) {
+      Alerta de emergencia enviada al cuidador.
+    }
+  </p>
+</section>

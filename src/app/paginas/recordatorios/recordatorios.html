@@ -1,0 +1,72 @@
+<h2 class="titulo-seccion">Mis recordatorios</h2>
+<p class="descripcion-seccion">
+  Arrastra cada recordatorio entre las columnas, o usa el botón de cada tarjeta.
+</p>
+
+<section class="panel">
+  <form class="form-fila" [formGroup]="form" (ngSubmit)="agregar()" novalidate>
+    <div class="campo">
+      <label for="texto">Nuevo recordatorio</label>
+      <input id="texto" type="text" formControlName="texto" />
+      @if (form.controls.texto.invalid && form.controls.texto.touched) {
+        <small class="error">Escribe al menos 3 letras.</small>
+      }
+    </div>
+    <div class="campo">
+      <label for="hora">Hora</label>
+      <input id="hora" type="time" formControlName="hora" />
+      @if (form.controls.hora.invalid && form.controls.hora.touched) {
+        <small class="error">Elige la hora.</small>
+      }
+    </div>
+    <button type="submit" [disabled]="form.invalid">Agregar</button>
+  </form>
+
+  <div class="columnas">
+    <div class="columna">
+      <h3 id="titulo-pendientes">Pendientes ({{ datos.pendientes().length }})</h3>
+      <div
+        class="lista"
+        cdkDropList
+        id="pendientes"
+        [cdkDropListData]="datos.pendientes()"
+        (cdkDropListDropped)="soltar($event)"
+        aria-labelledby="titulo-pendientes"
+      >
+        @for (r of datos.pendientes(); track r.id) {
+          <div class="recordatorio" cdkDrag>
+            <span class="asa" aria-hidden="true">⠿</span>
+            <span class="texto">{{ r.texto }}</span>
+            <strong>{{ r.hora }}</strong>
+            <button type="button" class="secundario" (click)="mover(r, true)">Hecho</button>
+          </div>
+        } @empty {
+          <p class="vacio">Suelta aquí un recordatorio.</p>
+        }
+      </div>
+    </div>
+
+    <div class="columna">
+      <h3 id="titulo-hechos">Completados ({{ datos.hechos().length }})</h3>
+      <div
+        class="lista hechos"
+        cdkDropList
+        id="hechos"
+        [cdkDropListData]="datos.hechos()"
+        (cdkDropListDropped)="soltar($event)"
+        aria-labelledby="titulo-hechos"
+      >
+        @for (r of datos.hechos(); track r.id) {
+          <div class="recordatorio" cdkDrag>
+            <span class="asa" aria-hidden="true">⠿</span>
+            <span class="texto">{{ r.texto }}</span>
+            <strong>{{ r.hora }}</strong>
+            <button type="button" class="secundario" (click)="mover(r, false)">Deshacer</button>
+          </div>
+        } @empty {
+          <p class="vacio">Suelta aquí un recordatorio.</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>

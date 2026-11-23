@@ -1,0 +1,190 @@
+.saludo {
+  margin-bottom: 1.25rem;
+}
+
+.saludo h2 {
+  color: #006f83;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.saludo p {
+  font-size: 1.1rem;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.8rem;
+}
+
+.ancho-total {
+  grid-column: 1 / -1;
+}
+
+.tarjeta {
+  min-height: 11.7rem;
+  background: #fff;
+  border-radius: 0.4rem;
+  padding: 0.8rem 1rem 3rem;
+  position: relative;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid currentColor;
+}
+
+.tarjeta button {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.8rem;
+  min-width: 7.8rem;
+}
+
+.cita {
+  border: 2px solid #9c48d2;
+}
+.cita h3 {
+  color: var(--color-morado);
+}
+.cita button {
+  background: #923dca;
+}
+
+.medicamentos,
+.clima {
+  border: 2px solid #55b8ef;
+}
+.medicamentos h3,
+.clima h3 {
+  color: #55aee6;
+}
+
+.recomendaciones {
+  border: 2px solid #d5bd00;
+}
+.recomendaciones h3 {
+  color: var(--color-amarillo);
+}
+
+strong {
+  color: #555;
+}
+
+.tarjeta p {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0.25rem 0;
+}
+
+.dato {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.detalle {
+  margin: 0.5rem 0 1.4rem;
+  padding: 0.6rem;
+  background: #f7edfc;
+  border-radius: 0.5rem;
+}
+
+.medicamento {
+  border: 1px solid #55b8ef;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.clima-contenido {
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.temperatura {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #087b8c;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+li::before {
+  content: '•';
+  color: #d5bd00;
+  position: absolute;
+  left: 0;
+}
+
+.emergencia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+
+.btn-emergencia {
+  width: 15.6rem;
+  height: 3.9rem;
+  border-radius: 1.1rem;
+  background: var(--color-peligro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s;
+}
+
+.btn-emergencia:hover:not(:disabled) {
+  background: #981b0b;
+}
+
+.btn-emergencia.presionado {
+  background: #7a1408;
+  transform: scale(0.97);
+}
+
+.btn-emergencia img {
+  width: 2.8rem;
+  height: 2.8rem;
+  object-fit: contain;
+}
+
+.textos {
+  text-align: left;
+}
+
+.textos strong {
+  display: block;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.textos span {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.aviso {
+  min-height: 1.2rem;
+  color: var(--color-peligro);
+  font-weight: bold;
+  font-size: 0.9rem;
+}

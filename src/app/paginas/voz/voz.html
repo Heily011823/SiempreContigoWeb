@@ -1,0 +1,13 @@
+<h2 class="titulo-seccion">Lectura de voz</h2>
+<p class="descripcion-seccion">Escucha la información de tus medicamentos y recordatorios.</p>
+
+<section class="panel">
+  @if (voz.disponible) {
+    <p>{{ texto() }}</p>
+    <div class="acciones" style="margin-top: 1rem">
+      <button type="button" (click)="escuchar()">Escuchar información</button>
+    </div>
+  } @else {
+    <p class="mensaje-error" role="alert">Tu navegador no permite la lectura de voz.</p>
+  }
+</section>
